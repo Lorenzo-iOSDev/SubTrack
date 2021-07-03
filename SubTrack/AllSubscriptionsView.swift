@@ -16,9 +16,15 @@ struct AllSubscriptionsView: View {
                     .fontWeight(.medium)
                 
                 Spacer()
+                
+                Button {
+                    print("Add Button Pressed")
+                } label: {
+                    AddButton()
+                }
             }
             .padding(.horizontal, 10)
-            .padding(.top, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            .padding(.top, 10)
             
             VStack {
                     CardList()
@@ -26,11 +32,6 @@ struct AllSubscriptionsView: View {
                     TotalCard()
             }
         }
-        .overlay(Button{
-            print("Add Button Pressed")
-        } label: {
-            AddButton()
-        }, alignment: .topTrailing)
     }
 }
 
@@ -45,7 +46,7 @@ struct AddButton: View {
         Image(systemName: "plus")
             .foregroundColor(.primary)
             .imageScale(.large)
-            .padding(.all, 15)
+            .padding(.all, 10)
     }
 }
 
@@ -75,8 +76,9 @@ struct TotalCard: View {
 struct CardList: View {
     var body: some View {
         List{
-            CardListCell()
-            CardListCell()
+            ForEach(0..<5) { _ in
+                CardListCell()
+            }
         }
         .padding()
         .background(
