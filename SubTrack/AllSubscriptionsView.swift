@@ -9,34 +9,43 @@ import SwiftUI
 
 struct AllSubscriptionsView: View {
     var body: some View {
-        ZStack {
-            //NavigationView {
-            VStack {
-                HStack{
-                    Text("All Subscriptions")
-                        .font(.largeTitle)
-                        .fontWeight(.medium)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal, 10)
-                .padding(.top, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack{
+                Text("All Subscriptions")
+                    .font(.largeTitle)
+                    .fontWeight(.medium)
                 
-                VStack {
-                        CardList()
-                        
-                        TotalCard()
-                }
+                Spacer()
             }
-               // .navigationTitle("All Subscriptions")
-            //}
+            .padding(.horizontal, 10)
+            .padding(.top, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            
+            VStack {
+                    CardList()
+                    
+                    TotalCard()
+            }
         }
+        .overlay(Button{
+            print("Add Button Pressed")
+        } label: {
+            AddButton()
+        }, alignment: .topTrailing)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         AllSubscriptionsView()
+    }
+}
+
+struct AddButton: View {
+    var body: some View {
+        Image(systemName: "plus")
+            .foregroundColor(.primary)
+            .imageScale(.large)
+            .padding(.all, 15)
     }
 }
 
