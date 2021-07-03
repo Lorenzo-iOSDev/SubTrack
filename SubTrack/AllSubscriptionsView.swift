@@ -59,7 +59,6 @@ struct TotalCard: View {
             
             Spacer()
             
-            
             Text("$14.99")
                 .font(.title3)
         }
@@ -76,8 +75,8 @@ struct TotalCard: View {
 struct CardList: View {
     var body: some View {
         List{
-            ForEach(0..<5) { _ in
-                CardListCell()
+            ForEach(MockData.services) { service in
+                CardListCell(subscription: service)
             }
         }
         .padding()
@@ -91,26 +90,28 @@ struct CardList: View {
 
 struct CardListCell: View {
     
+    var subscription: Subscription
+    
     var body: some View {
         HStack{
-            Image(systemName: "tv")
+            Image(systemName: subscription.serviceSymbol)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 60, height: 60)
+                .frame(width: 40, height: 40)
             
             VStack(alignment: .leading) {
-                Text("Apple TV+")
-                    .font(.title2)
+                Text(subscription.serviceName)
+                    .font(.title3)
                     .fontWeight(.medium)
                 
-                Text("Monthly")
+                Text(subscription.paymentFrequency)
                     .font(.body)
                     .italic()
-            }.padding(.leading)
+            }.padding(.leading, 10)
+            
             Spacer()
             
-            
-            Text("$14.99")
+            Text("\(subscription.price, specifier: "%.2f")")
                 .font(.title3)
         }
     }
