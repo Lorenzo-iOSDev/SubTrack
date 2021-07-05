@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct SubTrackTabView: View {
+    
+    @StateObject var viewModel = SubTrackViewModel()
+    
     var body: some View {
         TabView {
-            AllSubscriptionsView()
+            AllSubscriptionsView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "list.dash")
                     Text("All")
                 }
             
-            UpcomingSubscriptionsView()
+            UpcomingSubscriptionsView(viewModel: viewModel)
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("Upcoming")

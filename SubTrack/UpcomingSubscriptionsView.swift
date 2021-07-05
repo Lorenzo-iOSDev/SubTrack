@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct UpcomingSubscriptionsView: View {
+    
+    @ObservedObject var viewModel: SubTrackViewModel
+    
     var body: some View {
         VStack {
             HStack{
-                Text("Upcoming")
+                Text("Upcoming Payments")
                     .font(.largeTitle)
                     .fontWeight(.medium)
                 
                 Spacer()
                 
                 Button {
-                    print("Add Button Pressed")
+                    print(viewModel.subscriptions[1].upcomingClassifier ?? "No value") 
                 } label: {
                     AddButton()
                 }
@@ -27,11 +30,10 @@ struct UpcomingSubscriptionsView: View {
             .padding(.top, 10)
             
             ScrollView {
-                Card(upcomingWhen: "This Week")
                 
-                Card(upcomingWhen: "This Month")
-                
-                Card(upcomingWhen: "Next Month")
+                ForEach(viewModel.sortedSubscriptions) { subscription in
+                    UpcomingCard(subscription: subscription, upcomingClassifier: subscription.upcomingClassifier)
+                }
             }
         }
     }
@@ -39,51 +41,57 @@ struct UpcomingSubscriptionsView: View {
 
 struct UpcomingSubscriptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingSubscriptionsView()
+        UpcomingSubscriptionsView(viewModel: SubTrackViewModel())
     }
 }
 
-struct Card: View {
+struct UpcomingCard: View {
     
-    var upcomingWhen = ""
+    var subscription: Subscription
+    var upcomingClassifier: Upcoming?
     
     var body: some View {
-        VStack {
-            HStack {
-                Text(upcomingWhen)
-                    .font(.title3)
-                    .fontWeight(.medium)
+        if upcomingClassifier != nil {
+            VStack {
                 
-                Spacer()
-            }.padding(.horizontal, 10)
-            
-            HStack{
-                Image(systemName: "tv")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 60, height: 60)
-                
-                VStack(alignment: .leading) {
-                    Text("Apple TV+")
-                        .font(.title2)
+                HStack {
+                    Text(upcomingClassifier!.rawValue)
+                        .font(.title3)
                         .fontWeight(.medium)
                     
-                    Text("Monthly")
-                        .font(.body)
-                        .italic()
-                }.padding(.leading)
-                Spacer()
+                    Spacer()
+                }
+                .padding(.horizontal, 10)
+                .padding(.top, 10)
                 
-                
-                Text("$14.99")
-                    .font(.title3)
+                HStack{
+                    Image(systemName: subscription.serviceSymbol)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                    
+                    VStack(alignment: .leading) {
+                        Text(subscription.serviceName)
+                            .font(.title2)
+                            .fontWeight(.medium)
+                        
+                        Text(subscription.paymentFrequency)
+                            .font(.body)
+                            .italic()
+                    }.padding(.leading)
+                    Spacer()
+                    
+                    
+                    Text("$\(subscription.price, specifier: "%.2f")")
+                        .font(.title3)
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10.0)
+                        .foregroundColor(Color(.systemBackground))
+                        .shadow(radius: 8))
+                .padding(.horizontal, 10)
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10.0)
-                    .foregroundColor(Color(.systemBackground))
-                    .shadow(radius: 8))
-            .padding(.horizontal, 10)
         }
     }
 }

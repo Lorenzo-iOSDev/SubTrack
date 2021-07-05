@@ -7,39 +7,106 @@
 
 import Foundation
 
+enum Upcoming: String {
+    case Today = "Today"
+    case Tomorrow = "Tomorrow"
+    case ThisWeek = "This Week"
+    case ThisMonth = "This Month"
+}
+
 struct Subscription: Identifiable {
-    var id: Int
+    var id = UUID()
     
     let serviceName: String
     let paymentFrequency: String
     let serviceSymbol: String
     let price: Double
+    
+    let paymentDateString: String
+    
+    var paymentDate: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let date = dateFormatter.date(from: paymentDateString) else { return nil }
+        
+        return date
+    }
+    
+    var upcomingClassifier: Upcoming? {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        guard let paymentDate = paymentDate else { return nil }
+        
+        let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: paymentDate)
+        let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
+        
+        //print("Day:\(dateComponents.day!) Month: \(dateComponents.month!) Year: \(dateComponents.year!)")
+        
+        guard let dateCompsDay = dateComponents.day else { return nil }
+        guard let currentDateCompsDay = currentDateComponents.day else { return nil }
+        
+        let differenceInDays = dateCompsDay - currentDateCompsDay
+        
+        guard let dateCompsMonth = dateComponents.month else { return nil }
+        guard let currentDateCompsMonth = currentDateComponents.month else { return nil }
+        
+        let differenceInMonths = dateCompsMonth - currentDateCompsMonth
+        
+        //print("Difference in Days: \(differenceInDays), Months \(differenceInMonths)")
+        
+        if differenceInDays == 0 && differenceInMonths == 0 {
+            return Upcoming.Today
+        } else if differenceInDays == 1 && differenceInMonths == 0 {
+            return Upcoming.Tomorrow
+        } else if differenceInDays <= 7 && differenceInDays > 0 && differenceInMonths == 0 {
+            return Upcoming.ThisWeek
+        } else if differenceInDays > 7 && differenceInMonths == 0 {
+            return Upcoming.ThisMonth
+        }
+        
+        return nil
+    }
+    
+    var sortPriority: Int {
+        switch upcomingClassifier {
+        case .Today:
+            return 1
+        case .Tomorrow:
+            return 2
+        case .ThisWeek:
+            return 3
+        case .ThisMonth:
+            return 4
+        case .none:
+            return 5
+        }
+    }
 }
 
 struct MockData {
-    static let service1 = Subscription(id: 0001,
-                                       serviceName: "Apple TV+",
+    static let service1 = Subscription(serviceName: "Apple TV+",
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "tv",
-                                       price: 14.99)
+                                       price: 14.99,
+                                       paymentDateString: "05/07/2020")
     
-    static let service2 = Subscription(id: 0002,
-                                       serviceName: "Netflix",
+    static let service2 = Subscription(serviceName: "Netflix",
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "tv",
-                                       price: 19.99)
+                                       price: 19.99,
+                                       paymentDateString: "15/07/2019")
     
-    static let service3 = Subscription(id: 0003,
-                                       serviceName: "Spotify",
+    static let service3 = Subscription(serviceName: "Spotify",
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "music.note",
-                                       price: 10.99)
+                                       price: 10.99, paymentDateString: "06/07/2018")
     
-    static let service4 = Subscription(id: 0004,
-                                       serviceName: "Minecraft Server",
+    static let service4 = Subscription(serviceName: "Minecraft Server",
                                        paymentFrequency: "Quarterly",
                                        serviceSymbol: "server.rack",
-                                       price: 4.99)
+                                       price: 4.99, paymentDateString: "03/05/2015")
     
     static let services = [service1, service2, service3, service4]
 }

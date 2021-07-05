@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct AllSubscriptionsView: View {
+    
+    @ObservedObject var viewModel: SubTrackViewModel
+    
     var body: some View {
         VStack {
             HStack{
@@ -27,9 +30,9 @@ struct AllSubscriptionsView: View {
             .padding(.top, 10)
             
             VStack {
-                    CardList()
+                CardList(viewModel: viewModel)
                     
-                    TotalCard()
+                TotalCard(viewModel: viewModel)
             }
         }
     }
@@ -37,7 +40,7 @@ struct AllSubscriptionsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        AllSubscriptionsView()
+        AllSubscriptionsView(viewModel: SubTrackViewModel())
     }
 }
 
@@ -51,6 +54,9 @@ struct AddButton: View {
 }
 
 struct TotalCard: View {
+    
+    var viewModel: SubTrackViewModel
+    
     var body: some View {
         HStack{
             Text("Total Cost per Month")
@@ -59,7 +65,7 @@ struct TotalCard: View {
             
             Spacer()
             
-            Text("$14.99")
+            Text("$\(viewModel.totalPrice, specifier: "%.2f")")
                 .font(.title3)
         }
         .padding()
@@ -73,6 +79,9 @@ struct TotalCard: View {
 }
 
 struct CardList: View {
+    
+    var viewModel: SubTrackViewModel
+    
     var body: some View {
         List{
             ForEach(MockData.services) { service in
@@ -111,7 +120,7 @@ struct CardListCell: View {
             
             Spacer()
             
-            Text("\(subscription.price, specifier: "%.2f")")
+            Text("$\(subscription.price, specifier: "%.2f")")
                 .font(.title3)
         }
     }
