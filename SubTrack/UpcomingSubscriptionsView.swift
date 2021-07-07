@@ -21,7 +21,7 @@ struct UpcomingSubscriptionsView: View {
                 Spacer()
                 
                 Button {
-                    print(viewModel.subscriptions[1].upcomingClassifier ?? "No value") 
+                    viewModel.isShowingAddSubscription = true
                 } label: {
                     AddButton()
                 }
@@ -36,6 +36,9 @@ struct UpcomingSubscriptionsView: View {
                 }
             }
         }
+        .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
+            AddSubscriptionView(viewModel: viewModel)
+        })
     }
 }
 
@@ -64,34 +67,43 @@ struct UpcomingCard: View {
                 .padding(.horizontal, 10)
                 .padding(.top, 10)
                 
-                HStack{
-                    Image(systemName: subscription.serviceSymbol)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                    
-                    VStack(alignment: .leading) {
-                        Text(subscription.serviceName)
-                            .font(.title2)
-                            .fontWeight(.medium)
-                        
-                        Text(subscription.paymentFrequency)
-                            .font(.body)
-                            .italic()
-                    }.padding(.leading)
-                    Spacer()
-                    
-                    
-                    Text("$\(subscription.price, specifier: "%.2f")")
-                        .font(.title3)
-                }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10.0)
-                        .foregroundColor(Color(.systemBackground))
-                        .shadow(radius: 8))
-                .padding(.horizontal, 10)
+                SubscriptionCard(subscription: subscription)
             }
         }
+    }
+}
+
+struct SubscriptionCard: View {
+    
+    var subscription: Subscription
+    
+    var body: some View {
+        HStack{
+            Image(systemName: subscription.serviceSymbol)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50)
+            
+            VStack(alignment: .leading) {
+                Text(subscription.serviceName)
+                    .font(.title2)
+                    .fontWeight(.medium)
+                
+                Text(subscription.paymentFrequency)
+                    .font(.body)
+                    .italic()
+            }.padding(.leading)
+            Spacer()
+            
+            
+            Text("$\(subscription.price, specifier: "%.2f")")
+                .font(.title3)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 10.0)
+                .foregroundColor(Color(.systemBackground))
+                .shadow(radius: 8))
+        .padding(.horizontal, 10)
     }
 }

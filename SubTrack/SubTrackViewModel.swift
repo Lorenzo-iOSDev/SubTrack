@@ -12,6 +12,8 @@ final class SubTrackViewModel: ObservableObject {
     @Published var subscriptions: [Subscription] = MockData.services // should be empty array, using mock data to test
     @Published var sortedSubscriptions: [Subscription] = MockData.services.sorted(by: { $0.sortPriority < $1.sortPriority })
     
+    @Published var isShowingAddSubscription = false
+    
     var currentDate = Date()
     
     var totalPrice: Double {
@@ -24,6 +26,8 @@ final class SubTrackViewModel: ObservableObject {
     
     func addSubscription(_ subscription: Subscription) {
         subscriptions.append(subscription)
+        sortedSubscriptions.append(subscription)
+        sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
     }
     
     func deleteSubscription(at offsets: IndexSet) {

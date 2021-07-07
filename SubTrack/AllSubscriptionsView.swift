@@ -21,7 +21,7 @@ struct AllSubscriptionsView: View {
                 Spacer()
                 
                 Button {
-                    print("Add Button Pressed")
+                    viewModel.isShowingAddSubscription = true
                 } label: {
                     AddButton()
                 }
@@ -58,33 +58,38 @@ struct TotalCard: View {
     var viewModel: SubTrackViewModel
     
     var body: some View {
-        HStack{
-            Text("Total Cost per Month")
-                .font(.title2)
-                .fontWeight(.medium)
-            
-            Spacer()
-            
-            Text("$\(viewModel.totalPrice, specifier: "%.2f")")
-                .font(.title3)
+        Button {
+            //action
+        } label: {
+            HStack{
+                Text("Total Cost per Month")
+                    .font(.title2)
+                    .fontWeight(.medium)
+                
+                Spacer()
+                
+                Text("$\(viewModel.totalPrice, specifier: "%.2f")")
+                    .font(.title3)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 10.0)
+                    .foregroundColor(Color(.systemBackground))
+                    .shadow(radius: 10))
+            .padding(10)
+            .padding(.bottom, 15)
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(Color(.systemBackground))
-                .shadow(radius: 10))
-        .padding(10)
-        .padding(.bottom, 15)
+        .foregroundColor(.primary)
     }
 }
 
 struct CardList: View {
     
-    var viewModel: SubTrackViewModel
+    @ObservedObject var viewModel: SubTrackViewModel
     
     var body: some View {
         List{
-            ForEach(MockData.services) { service in
+            ForEach(viewModel.subscriptions) { service in
                 CardListCell(subscription: service)
             }
         }

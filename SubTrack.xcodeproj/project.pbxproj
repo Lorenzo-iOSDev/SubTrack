@@ -15,6 +15,9 @@
 		9C6B26CC268FF76000E4D428 /* SubTrackTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6B26CB268FF76000E4D428 /* SubTrackTabView.swift */; };
 		9C6B26CE26901F2E00E4D428 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6B26CD26901F2E00E4D428 /* Subscription.swift */; };
 		9C9E0EDE269198EE006445CF /* SubTrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9E0EDD269198EE006445CF /* SubTrackViewModel.swift */; };
+		9CA45F9E2693A69E008344A4 /* AddSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */; };
+		9CA45FA02693AF22008344A4 /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45F9F2693AF22008344A4 /* XDismissButton.swift */; };
+		9CA45FA2269402F3008344A4 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45FA1269402F3008344A4 /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		9C6B26CB268FF76000E4D428 /* SubTrackTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTrackTabView.swift; sourceTree = "<group>"; };
 		9C6B26CD26901F2E00E4D428 /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		9C9E0EDD269198EE006445CF /* SubTrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTrackViewModel.swift; sourceTree = "<group>"; };
+		9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionView.swift; sourceTree = "<group>"; };
+		9CA45F9F2693AF22008344A4 /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
+		9CA45FA1269402F3008344A4 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,9 @@
 				9C6B26BC268FDD2600E4D428 /* Assets.xcassets */,
 				9C6B26C1268FDD2600E4D428 /* Info.plist */,
 				9C6B26BE268FDD2600E4D428 /* Preview Content */,
+				9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */,
+				9CA45F9F2693AF22008344A4 /* XDismissButton.swift */,
+				9CA45FA1269402F3008344A4 /* Date+Ext.swift */,
 			);
 			path = SubTrack;
 			sourceTree = "<group>";
@@ -150,12 +159,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CA45FA2269402F3008344A4 /* Date+Ext.swift in Sources */,
 				9C6B26BB268FDD2400E4D428 /* AllSubscriptionsView.swift in Sources */,
 				9C9E0EDE269198EE006445CF /* SubTrackViewModel.swift in Sources */,
+				9CA45F9E2693A69E008344A4 /* AddSubscriptionView.swift in Sources */,
 				9C6B26CC268FF76000E4D428 /* SubTrackTabView.swift in Sources */,
 				9C6B26CA268FF74000E4D428 /* UpcomingSubscriptionsView.swift in Sources */,
 				9C6B26B9268FDD2400E4D428 /* SubTrackApp.swift in Sources */,
 				9C6B26CE26901F2E00E4D428 /* Subscription.swift in Sources */,
+				9CA45FA02693AF22008344A4 /* XDismissButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

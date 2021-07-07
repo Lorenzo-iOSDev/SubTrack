@@ -14,6 +14,14 @@ enum Upcoming: String {
     case ThisMonth = "This Month"
 }
 
+enum Symbols: String, CaseIterable{
+    case TV = "tv"
+    case Music = "headphones"
+    case Server = "server.rack"
+    case Gaming = "gamecontroller"
+    case Network = "network"
+}
+
 struct Subscription: Identifiable {
     var id = UUID()
     
@@ -21,7 +29,6 @@ struct Subscription: Identifiable {
     let paymentFrequency: String
     let serviceSymbol: String
     let price: Double
-    
     let paymentDateString: String
     
     var paymentDate: Date? {
@@ -37,20 +44,20 @@ struct Subscription: Identifiable {
         let calendar = Calendar.current
         let currentDate = Date()
         
-        guard let paymentDate = paymentDate else { return nil }
+        guard let paymentDate = paymentDate else { return nil } //return error alert
         
         let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: paymentDate)
         let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
         
         //print("Day:\(dateComponents.day!) Month: \(dateComponents.month!) Year: \(dateComponents.year!)")
         
-        guard let dateCompsDay = dateComponents.day else { return nil }
-        guard let currentDateCompsDay = currentDateComponents.day else { return nil }
+        guard let dateCompsDay = dateComponents.day else { return nil } //return error alert
+        guard let currentDateCompsDay = currentDateComponents.day else { return nil } //return error alert
         
         let differenceInDays = dateCompsDay - currentDateCompsDay
         
-        guard let dateCompsMonth = dateComponents.month else { return nil }
-        guard let currentDateCompsMonth = currentDateComponents.month else { return nil }
+        guard let dateCompsMonth = dateComponents.month else { return nil } //return error alert
+        guard let currentDateCompsMonth = currentDateComponents.month else { return nil } //return error alert
         
         let differenceInMonths = dateCompsMonth - currentDateCompsMonth
         
