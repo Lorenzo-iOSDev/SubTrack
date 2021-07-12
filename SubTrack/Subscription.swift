@@ -22,6 +22,14 @@ enum Symbols: String, CaseIterable{
     case Network = "network"
 }
 
+enum PaymentFrequency: String, CaseIterable {
+    case Weekly = "Weekly"
+    case Monthly = "Monthly"
+    case Quarterly = "Quarterly"
+    case BiAnnually = "Bi-Annually"
+    case Annually = "Annually"
+}
+
 struct Subscription: Identifiable {
     var id = UUID()
     
@@ -97,13 +105,13 @@ struct MockData {
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "tv",
                                        price: 14.99,
-                                       paymentDateString: "05/07/2020")
+                                       paymentDateString: "09/07/2020")
     
     static let service2 = Subscription(serviceName: "Netflix",
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "tv",
                                        price: 19.99,
-                                       paymentDateString: "15/07/2019")
+                                       paymentDateString: "10/07/2019")
     
     static let service3 = Subscription(serviceName: "Spotify",
                                        paymentFrequency: "Monthly",
@@ -113,7 +121,7 @@ struct MockData {
     static let service4 = Subscription(serviceName: "Minecraft Server",
                                        paymentFrequency: "Quarterly",
                                        serviceSymbol: "server.rack",
-                                       price: 4.99, paymentDateString: "03/05/2015")
+                                       price: 4.99, paymentDateString: "23/07/2015")
     
     static let services = [service1, service2, service3, service4]
 }

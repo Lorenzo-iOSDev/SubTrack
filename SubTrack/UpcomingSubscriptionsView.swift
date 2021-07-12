@@ -12,33 +12,38 @@ struct UpcomingSubscriptionsView: View {
     @ObservedObject var viewModel: SubTrackViewModel
     
     var body: some View {
-        VStack {
-            HStack{
-                Text("Upcoming Payments")
-                    .font(.largeTitle)
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                Button {
-                    viewModel.isShowingAddSubscription = true
-                } label: {
-                    AddButton()
-                }
-            }
-            .padding(.horizontal, 10)
-            .padding(.top, 10)
+        ZStack {
+            Color(.secondarySystemBackground)
+                .ignoresSafeArea()
             
-            ScrollView {
+            VStack {
+                HStack{
+                    Text("Upcoming Payments")
+                        .font(.largeTitle)
+                        .fontWeight(.medium)
+                    
+                    Spacer()
+                    
+                    Button {
+                        viewModel.isShowingAddSubscription = true
+                    } label: {
+                        AddButton()
+                    }
+                }
+                .padding(.horizontal, 10)
+                .padding(.top, 10)
                 
-                ForEach(viewModel.sortedSubscriptions) { subscription in
-                    UpcomingCard(subscription: subscription, upcomingClassifier: subscription.upcomingClassifier)
+                ScrollView {
+                    
+                    ForEach(viewModel.sortedSubscriptions) { subscription in
+                        UpcomingCard(subscription: subscription, upcomingClassifier: subscription.upcomingClassifier)
+                    }
                 }
             }
-        }
-        .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
-            AddSubscriptionView(viewModel: viewModel)
+            .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
+                AddSubscriptionView(viewModel: viewModel)
         })
+        }
     }
 }
 
@@ -102,8 +107,8 @@ struct SubscriptionCard: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(Color(.systemBackground))
-                .shadow(radius: 8))
+                .foregroundColor(Color(.systemBackground)))
+                //.shadow(radius: 8))
         .padding(.horizontal, 10)
     }
 }

@@ -12,27 +12,32 @@ struct AllSubscriptionsView: View {
     @ObservedObject var viewModel: SubTrackViewModel
     
     var body: some View {
-        VStack {
-            HStack{
-                Text("All Subscriptions")
-                    .font(.largeTitle)
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                Button {
-                    viewModel.isShowingAddSubscription = true
-                } label: {
-                    AddButton()
-                }
-            }
-            .padding(.horizontal, 10)
-            .padding(.top, 10)
+        ZStack {
+            Color(.secondarySystemBackground)
+                .ignoresSafeArea()
             
             VStack {
-                CardList(viewModel: viewModel)
+                HStack{
+                    Text("All Subscriptions")
+                        .font(.largeTitle)
+                        .fontWeight(.medium)
                     
-                TotalCard(viewModel: viewModel)
+                    Spacer()
+                    
+                    Button {
+                        viewModel.isShowingAddSubscription = true
+                    } label: {
+                        AddButton()
+                    }
+                }
+                .padding(.horizontal, 10)
+                .padding(.top, 10)
+                
+                VStack {
+                    CardList(viewModel: viewModel)
+                        
+                    TotalCard(viewModel: viewModel)
+                }
             }
         }
     }
@@ -41,6 +46,7 @@ struct AllSubscriptionsView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         AllSubscriptionsView(viewModel: SubTrackViewModel())
+            
     }
 }
 
@@ -74,8 +80,7 @@ struct TotalCard: View {
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 10.0)
-                    .foregroundColor(Color(.systemBackground))
-                    .shadow(radius: 10))
+                    .foregroundColor(Color(.systemBackground)))
             .padding(10)
             .padding(.bottom, 15)
         }
@@ -96,8 +101,7 @@ struct CardList: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(Color(.systemBackground))
-                .shadow(radius: 10))
+                .foregroundColor(Color(.systemBackground)))
         .padding(.horizontal, 10)
     }
 }
