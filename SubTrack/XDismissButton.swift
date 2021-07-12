@@ -21,6 +21,7 @@ struct XDismissButton: View {
                 Image(systemName: "xmark")
                     .foregroundColor(Color(.label))
                     .imageScale(.large)
+                    .frame(width: 44, height: 44, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
         }.padding()
     }

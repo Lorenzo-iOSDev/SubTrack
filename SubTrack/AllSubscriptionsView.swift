@@ -39,6 +39,9 @@ struct AllSubscriptionsView: View {
                     TotalCard(viewModel: viewModel)
                 }
             }
+            .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
+                AddSubscriptionView(viewModel: viewModel)
+        })
         }
     }
 }
