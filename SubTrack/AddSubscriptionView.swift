@@ -15,7 +15,7 @@ struct AddSubscriptionView: View {
     @State private var subPrice = ""
     @State private var subDate = Date()
     
-    @State private var subPaymentFreq = 1
+    @State private var paymentFreqPicked = 1
     
     @State private var symbolPicked = 0
     
@@ -32,7 +32,7 @@ struct AddSubscriptionView: View {
                             TextField("Name", text: $subName)
                             TextField("Price", text: $subPrice)
                             DatePicker("Payment Date", selection: $subDate, displayedComponents: [.date])
-                            Picker("Payment Frequency", selection: $subPaymentFreq) {
+                            Picker("Payment Frequency", selection: $paymentFreqPicked) {
                                 ForEach(PaymentFrequency.allCases.indices) { index in
                                     Text(PaymentFrequency.allCases[index].rawValue)
 
@@ -54,8 +54,8 @@ struct AddSubscriptionView: View {
                         Section {
                             Button {
                                 let newSubscription = Subscription(serviceName: subName,
-                                                                   paymentFrequency: "Monthly",
-                                                                   serviceSymbol: "tv",
+                                                                   paymentFrequency: PaymentFrequency.allCases[paymentFreqPicked].rawValue,
+                                                                   serviceSymbol: Symbols.allCases[symbolPicked].rawValue,
                                                                    price: Double(subPrice)!, // unwrap properly
                                                                    paymentDateString: subDate.toString())
 
