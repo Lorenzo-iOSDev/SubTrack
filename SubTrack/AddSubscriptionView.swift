@@ -10,58 +10,38 @@ import SwiftUI
 struct AddSubscriptionView: View {
     
     @ObservedObject var viewModel: SubTrackViewModel
-
-    @State private var subName = ""
-    @State private var subPrice = ""
-    @State private var subDate = Date()
-    
-    @State private var paymentFreqPicked = 1
-    
-    @State private var symbolPicked = 0
-    
-    var newSubscription: Subscription {
-        Subscription(serviceName: subName, paymentFrequency: "Monthly", serviceSymbol: "tv", price: Double(subPrice) ?? 0.00, paymentDateString: subDate.toString())
-    }
     
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
                     Form {
+                        
                         Section(header: Text("Subscription Details")) {
-                            TextField("Name", text: $subName)
-                            TextField("Price", text: $subPrice)
-                            DatePicker("Payment Date", selection: $subDate, displayedComponents: [.date])
-                            Picker("Payment Frequency", selection: $paymentFreqPicked) {
+                            TextField("Name", text: $viewModel.subName)
+                            TextField("Price", text: $viewModel.subPrice)
+                            DatePicker("Payment Date", selection: $viewModel.subDate, displayedComponents: [.date])
+                            Picker("Payment Frequency", selection: $viewModel.paymentFreqPicked) {
                                 ForEach(PaymentFrequency.allCases.indices) { index in
                                     Text(PaymentFrequency.allCases[index].rawValue)
-
                                 }
                             }
                         }
 
                         Section(header: Text("Subscription Icon")) {
-                            Picker("Pick Icon", selection: $symbolPicked) {
+                            Picker("Pick Icon", selection: $viewModel.symbolPicked) {
                                 ForEach(Symbols.allCases.indices) { index in
                                     Image(systemName: Symbols.allCases[index].rawValue)
                                         .imageScale(.large)
                                         .frame(width: 44, height: 44)
                                 }
                             }
-
                         }
 
                         Section {
                             Button {
-                                let newSubscription = Subscription(serviceName: subName,
-                                                                   paymentFrequency: PaymentFrequency.allCases[paymentFreqPicked].rawValue,
-                                                                   serviceSymbol: Symbols.allCases[symbolPicked].rawValue,
-                                                                   price: Double(subPrice)!, // unwrap properly
-                                                                   paymentDateString: subDate.toString())
-
-                                viewModel.addSubscription(newSubscription)
-
-                                viewModel.isShowingAddSubscription = false
+                                viewModel.addSubscription()
+                                viewModel.isShowingAddSubscription.toggle()
                             } label: {
                                 Text("Add New Subscription")
                             }
