@@ -30,7 +30,7 @@ enum PaymentFrequency: String, CaseIterable {
     case Annually = "Annually"
 }
 
-struct Subscription: Identifiable {
+struct Subscription: Identifiable, Codable{
     var id = UUID()
     
     let serviceName: String

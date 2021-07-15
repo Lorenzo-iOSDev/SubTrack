@@ -44,6 +44,9 @@ struct UpcomingSubscriptionsView: View {
                 AddSubscriptionView(viewModel: viewModel)
         })
         }
+        .onAppear() {
+            viewModel.retrieveSubscriptions()
+        }
     }
 }
 

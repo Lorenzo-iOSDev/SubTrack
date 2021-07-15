@@ -9,9 +9,12 @@ import SwiftUI
 
 final class SubTrackViewModel: ObservableObject {
     
+    //Saved Data
+    @AppStorage("subscriptions") private var subscriptionsData: Data?
+    
     //Subscription Arrays
-    @Published var subscriptions: [Subscription] = MockData.services // should be empty array, using mock data to test
-    @Published var sortedSubscriptions: [Subscription] = MockData.services.sorted(by: { $0.sortPriority < $1.sortPriority })
+    @Published var subscriptions: [Subscription] = [] // should be empty array, using mock data to test
+    @Published var sortedSubscriptions: [Subscription] = []
     
     //View Dependent bool
     @Published var isShowingAddSubscription = false
@@ -33,10 +36,6 @@ final class SubTrackViewModel: ObservableObject {
         return total
     }
     
-    var newSubscription: Subscription {
-        Subscription(serviceName: subName, paymentFrequency: "Monthly", serviceSymbol: "tv", price: Double(subPrice) ?? 0.00, paymentDateString: subDate.toString())
-    }
-    
     func addSubscription() {
         guard let priceDouble = Double(subPrice) else { return } // return error
         
@@ -49,11 +48,51 @@ final class SubTrackViewModel: ObservableObject {
         subscriptions.append(newSub)
         sortedSubscriptions.append(newSub)
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
+        
+        saveSubscriptions()
+        resetFormFields()
+    }
+    
+    func resetFormFields() {
+        subName = ""
+        subPrice = ""
+        subDate = Date()
+        paymentFreqPicked = 1
+        symbolPicked = 0
     }
     
     func deleteSubscription(at offsets: IndexSet) {
         subscriptions.remove(atOffsets: offsets)
+        
+        saveSubscriptions()
     }
     
+    func saveSubscriptions() {
+        //check if form is valid before saving
+        
+        do {
+            let data = try JSONEncoder().encode(subscriptions)
+            subscriptionsData = data
+        } catch {
+            //AlertItem for failed saving
+            print("Failed to Save: Invalid Data")
+        }
+    }
+    
+    func retrieveSubscriptions() {
+        guard let subscriptionsData = subscriptionsData else {
+            return // error could not find data
+        }
+        
+        do {
+            subscriptions = try JSONDecoder().decode([Subscription].self, from: subscriptionsData)
+        } catch {
+            //AlertItem invalid data
+            print("Failed to Load: Invalid Data")
+        }
+        
+        sortedSubscriptions = subscriptions
+        sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
+    }
     
 }

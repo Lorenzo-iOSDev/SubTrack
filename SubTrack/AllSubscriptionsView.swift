@@ -43,6 +43,9 @@ struct AllSubscriptionsView: View {
                 AddSubscriptionView(viewModel: viewModel)
         })
         }
+        .onAppear() {
+            viewModel.retrieveSubscriptions()
+        }
     }
 }
 
@@ -100,6 +103,9 @@ struct CardList: View {
             ForEach(viewModel.subscriptions) { service in
                 CardListCell(subscription: service)
             }
+            .onDelete(perform: { indexSet in
+                viewModel.deleteSubscription(at: indexSet)
+            })
         }
         .padding()
         .background(
