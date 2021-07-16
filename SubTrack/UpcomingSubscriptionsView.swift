@@ -25,7 +25,7 @@ struct UpcomingSubscriptionsView: View {
                     Spacer()
                     
                     Button {
-                        viewModel.isShowingAddSubscription = true
+                        viewModel.showAddSubscriptionsView()
                     } label: {
                         AddButton()
                     }
@@ -53,65 +53,5 @@ struct UpcomingSubscriptionsView: View {
 struct UpcomingSubscriptionsView_Previews: PreviewProvider {
     static var previews: some View {
         UpcomingSubscriptionsView(viewModel: SubTrackViewModel())
-    }
-}
-
-struct UpcomingCard: View {
-    
-    var subscription: Subscription
-    var upcomingClassifier: Upcoming?
-    
-    var body: some View {
-        if upcomingClassifier != nil {
-            VStack {
-                
-                HStack {
-                    Text(upcomingClassifier!.rawValue)
-                        .font(.title3)
-                        .fontWeight(.medium)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal, 10)
-                .padding(.top, 10)
-                
-                SubscriptionCard(subscription: subscription)
-            }
-        }
-    }
-}
-
-struct SubscriptionCard: View {
-    
-    var subscription: Subscription
-    
-    var body: some View {
-        HStack{
-            Image(systemName: subscription.serviceSymbol)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
-            
-            VStack(alignment: .leading) {
-                Text(subscription.serviceName)
-                    .font(.title2)
-                    .fontWeight(.medium)
-                
-                Text(subscription.paymentFrequency)
-                    .font(.body)
-                    .italic()
-            }.padding(.leading)
-            Spacer()
-            
-            
-            Text("$\(subscription.price, specifier: "%.2f")")
-                .font(.title3)
-        }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(Color(.systemBackground)))
-                //.shadow(radius: 8))
-        .padding(.horizontal, 10)
     }
 }

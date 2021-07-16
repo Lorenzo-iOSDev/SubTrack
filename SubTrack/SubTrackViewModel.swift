@@ -61,6 +61,10 @@ final class SubTrackViewModel: ObservableObject {
         symbolPicked = 0
     }
     
+    func showAddSubscriptionsView() {
+        isShowingAddSubscription = true
+    }
+    
     func deleteSubscription(at offsets: IndexSet) {
         subscriptions.remove(atOffsets: offsets)
         
