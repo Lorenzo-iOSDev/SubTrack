@@ -57,8 +57,6 @@ struct Subscription: Identifiable, Codable{
         let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: paymentDate)
         let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
         
-        //print("Day:\(dateComponents.day!) Month: \(dateComponents.month!) Year: \(dateComponents.year!)")
-        
         guard let dateCompsDay = dateComponents.day else { return nil } //return error alert
         guard let currentDateCompsDay = currentDateComponents.day else { return nil } //return error alert
         
@@ -68,8 +66,6 @@ struct Subscription: Identifiable, Codable{
         guard let currentDateCompsMonth = currentDateComponents.month else { return nil } //return error alert
         
         let differenceInMonths = dateCompsMonth - currentDateCompsMonth
-        
-        //print("Difference in Days: \(differenceInDays), Months \(differenceInMonths)")
         
         if differenceInDays == 0 && differenceInMonths == 0 {
             return Upcoming.Today
@@ -105,18 +101,18 @@ struct MockData {
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "tv",
                                        price: 14.99,
-                                       paymentDateString: "09/07/2020")
+                                       paymentDateString: "19/07/2020")
     
     static let service2 = Subscription(serviceName: "Netflix",
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "tv",
                                        price: 19.99,
-                                       paymentDateString: "10/07/2019")
+                                       paymentDateString: "19/07/2019")
     
     static let service3 = Subscription(serviceName: "Spotify",
                                        paymentFrequency: "Monthly",
                                        serviceSymbol: "music.note",
-                                       price: 10.99, paymentDateString: "06/07/2018")
+                                       price: 10.99, paymentDateString: "20/07/2018")
     
     static let service4 = Subscription(serviceName: "Minecraft Server",
                                        paymentFrequency: "Quarterly",

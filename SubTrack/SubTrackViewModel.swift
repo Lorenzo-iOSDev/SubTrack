@@ -14,7 +14,13 @@ final class SubTrackViewModel: ObservableObject {
     
     //Subscription Arrays
     @Published var subscriptions: [Subscription] = [] // should be empty array, using mock data to test
-    @Published var sortedSubscriptions: [Subscription] = []
+    var sortedSubscriptions: [Subscription] = []
+    
+    //Upcoming Subscriptions Arrays
+    @Published var today: [Subscription] = []
+    @Published var tomorrow: [Subscription] = []
+    @Published var thisWeek: [Subscription] = []
+    @Published var thisMonth: [Subscription] = []
     
     //View Dependent bool
     @Published var isShowingAddSubscription = false
@@ -33,7 +39,15 @@ final class SubTrackViewModel: ObservableObject {
         for sub in subscriptions {
             total += sub.price
         }
+        
         return total
+    }
+    
+    func filterSubscriptions() {
+        today = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.Today}
+        tomorrow = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.Tomorrow}
+        thisWeek = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.ThisWeek}
+        thisMonth = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.ThisMonth}
     }
     
     func addSubscription() {
@@ -48,6 +62,7 @@ final class SubTrackViewModel: ObservableObject {
         subscriptions.append(newSub)
         sortedSubscriptions.append(newSub)
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
+        filterSubscriptions()
         
         saveSubscriptions()
         resetFormFields()
@@ -97,6 +112,7 @@ final class SubTrackViewModel: ObservableObject {
         
         sortedSubscriptions = subscriptions
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
+        filterSubscriptions()
     }
     
 }

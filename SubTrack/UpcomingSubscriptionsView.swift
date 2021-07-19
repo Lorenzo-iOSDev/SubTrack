@@ -34,10 +34,7 @@ struct UpcomingSubscriptionsView: View {
                 .padding(.top, 10)
                 
                 ScrollView {
-                    
-                    ForEach(viewModel.sortedSubscriptions) { subscription in
-                        UpcomingCard(subscription: subscription, upcomingClassifier: subscription.upcomingClassifier)
-                    }
+                    UpcomingCards(viewModel: viewModel)
                 }
             }
             .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
