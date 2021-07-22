@@ -7,52 +7,81 @@
 
 import Foundation
 
-enum Upcoming: String {
-    case Today = "Today"
-    case Tomorrow = "Tomorrow"
-    case ThisWeek = "This Week"
-    case ThisMonth = "This Month"
-}
-
-enum Symbols: String, CaseIterable{
-    case TV = "tv"
-    case Music = "headphones"
-    case Server = "server.rack"
-    case Gaming = "gamecontroller"
-    case Network = "network"
-}
-
-enum PaymentFrequency: String, CaseIterable {
-    case Weekly = "Weekly"
-    case Monthly = "Monthly"
-    case Quarterly = "Quarterly"
-    case BiAnnually = "Bi-Annually"
-    case Annually = "Annually"
-}
-
-struct Subscription: Identifiable, Codable{
+class Subscription: Identifiable, Codable{
     var id = UUID()
     
     let serviceName: String
-    let paymentFrequency: String
-    let serviceSymbol: String
+    let paymentFrequency: PaymentFrequency
+    let serviceSymbol: Symbols
     let price: Double
-    let paymentDateString: String
+    let subStartDate: Date
     
-    var paymentDate: Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        
-        guard let date = dateFormatter.date(from: paymentDateString) else { return nil }
-        
-        return date
+    var paymentDate: Date// {
+//        var newPaymentDate = Date()
+//
+//        if paymentIsDue {
+//            switch paymentFrequency {
+//            case .Weekly:
+//                newPaymentDate = self.paymentDate.nextWeek()
+//            case .Monthly:
+//                newPaymentDate = self.paymentDate.nextMonth()
+//            case .Quarterly:
+//                newPaymentDate = self.paymentDate.nextQuarter()
+//            case .BiAnnually:
+//                newPaymentDate = self.paymentDate.nextHalfYear()
+//            case .Annually:
+//                newPaymentDate = self.paymentDate.nextYear()
+//            }
+//        }
+//
+//        return newPaymentDate
+//    }
+    
+    var nextPaymentDate : Date {
+        var newPaymentDate = Date()
+
+        if paymentIsDue {
+            switch paymentFrequency {
+            case .Weekly:
+                newPaymentDate = paymentDate.nextWeek()
+                self.paymentDate = newPaymentDate
+            case .Monthly:
+                newPaymentDate = paymentDate.nextMonth()
+                self.paymentDate = newPaymentDate
+            case .Quarterly:
+                newPaymentDate = paymentDate.nextQuarter()
+                self.paymentDate = newPaymentDate
+            case .BiAnnually:
+                newPaymentDate = paymentDate.nextHalfYear()
+                self.paymentDate = newPaymentDate
+            case .Annually:
+                newPaymentDate = paymentDate.nextYear()
+                self.paymentDate = newPaymentDate
+            }
+        }
+
+        return newPaymentDate
     }
     
+    var paymentIsDue: Bool {
+        let calendar = Calendar.autoupdatingCurrent
+        
+        //guard let paymentDate = paymentDate else { return nil } // return error alert
+        
+        if (calendar.isDateInYesterday(paymentDate)) {
+            return true
+        }
+        
+        return false
+    }
+    
+    var firstPaymentDateSet: Bool = false
+    
     var upcomingClassifier: Upcoming? {
-        let calendar = Calendar.current
+        let calendar = Calendar.autoupdatingCurrent
         let currentDate = Date()
         
-        guard let paymentDate = paymentDate else { return nil } //return error alert
+        //guard let paymentDate = paymentDate else { return nil } //return error alert
         
         let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: paymentDate)
         let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
@@ -94,30 +123,83 @@ struct Subscription: Identifiable, Codable{
             return 5
         }
     }
+    
+    init(serviceName: String, paymentFrequency: PaymentFrequency, serviceSymbol: Symbols, price: Double, subStartDate: Date, paymentDate: Date) {
+        self.serviceName = serviceName
+        self.paymentFrequency = paymentFrequency
+        self.serviceSymbol = serviceSymbol
+        self.price = price
+        self.subStartDate = subStartDate
+        self.paymentDate = paymentDate
+    }
+    
+//    mutating func updatePaymentDate() {
+////        let dateFormatter = DateFormatter()
+////        dateFormatter.dateFormat = "dd/MM/yyyy"
+//
+//        if (firstPaymentDateSet == false) {
+//            //if let startDate = dateFormatter.date(from: subStartDate) {
+//                var nextPaymentDate = Date()
+//
+//                switch paymentFrequency {
+//                    case .Weekly:
+//                        nextPaymentDate = subStartDate.nextWeek()
+//                    case .Monthly:
+//                        nextPaymentDate = subStartDate.nextMonth()
+//                    case .Quarterly:
+//                        nextPaymentDate = subStartDate.nextQuarter()
+//                    case .BiAnnually:
+//                        nextPaymentDate = subStartDate.nextHalfYear()
+//                    case .Annually:
+//                        nextPaymentDate = subStartDate.nextYear()
+//                    }
+//
+//                self.paymentDate = nextPaymentDate
+//                self.firstPaymentDateSet = true
+//        } else {
+//                var nextPaymentDate = Date()
+//
+//                switch paymentFrequency {
+//                    case .Weekly:
+//                        nextPaymentDate = paymentDate.nextWeek()
+//                    case .Monthly:
+//                        nextPaymentDate = paymentDate.nextMonth()
+//                    case .Quarterly:
+//                        nextPaymentDate = paymentDate.nextQuarter()
+//                    case .BiAnnually:
+//                        nextPaymentDate = paymentDate.nextHalfYear()
+//                    case .Annually:
+//                        nextPaymentDate = paymentDate.nextYear()
+//                    }
+//
+//                self.paymentDate = nextPaymentDate
+//
+//        }
+//    }
 }
 
-struct MockData {
-    static let service1 = Subscription(serviceName: "Apple TV+",
-                                       paymentFrequency: "Monthly",
-                                       serviceSymbol: "tv",
-                                       price: 14.99,
-                                       paymentDateString: "19/07/2020")
-    
-    static let service2 = Subscription(serviceName: "Netflix",
-                                       paymentFrequency: "Monthly",
-                                       serviceSymbol: "tv",
-                                       price: 19.99,
-                                       paymentDateString: "19/07/2019")
-    
-    static let service3 = Subscription(serviceName: "Spotify",
-                                       paymentFrequency: "Monthly",
-                                       serviceSymbol: "music.note",
-                                       price: 10.99, paymentDateString: "20/07/2018")
-    
-    static let service4 = Subscription(serviceName: "Minecraft Server",
-                                       paymentFrequency: "Quarterly",
-                                       serviceSymbol: "server.rack",
-                                       price: 4.99, paymentDateString: "23/07/2015")
-    
-    static let services = [service1, service2, service3, service4]
-}
+//struct MockData {
+//    static let service1 = Subscription(serviceName: "Apple TV+",
+//                                       paymentFrequency: PaymentFrequency.Monthly,
+//                                       serviceSymbol: Symbols.TV,
+//                                       price: 14.99,
+//                                       subStartDate: "19/07/2020")
+//
+//    static let service2 = Subscription(serviceName: "Netflix",
+//                                       paymentFrequency: PaymentFrequency.Monthly,
+//                                       serviceSymbol: Symbols.TV,
+//                                       price: 19.99,
+//                                       subStartDate: "19/07/2019")
+//
+//    static let service3 = Subscription(serviceName: "Spotify",
+//                                       paymentFrequency: PaymentFrequency.Monthly,
+//                                       serviceSymbol: Symbols.Music,
+//                                       price: 10.99, subStartDate: "20/07/2018")
+//
+//    static let service4 = Subscription(serviceName: "Minecraft Server",
+//                                       paymentFrequency: PaymentFrequency.Quarterly,
+//                                       serviceSymbol: Symbols.Server,
+//                                       price: 4.99, subStartDate: "23/07/2015")
+//
+//    static let services = [service1, service2, service3, service4]
+//}

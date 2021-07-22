@@ -12,6 +12,9 @@
 		9C27CA6F26A1158500FAFC64 /* SubscriptionListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27CA6E26A1158500FAFC64 /* SubscriptionListCard.swift */; };
 		9C27CA7126A1182A00FAFC64 /* SubscriptionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27CA7026A1182A00FAFC64 /* SubscriptionCard.swift */; };
 		9C27CA7326A1186E00FAFC64 /* UpcomingCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27CA7226A1186E00FAFC64 /* UpcomingCards.swift */; };
+		9C5FC60126A6B7AA00C4673E /* Upcoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC60026A6B7AA00C4673E /* Upcoming.swift */; };
+		9C5FC60326A6B7C400C4673E /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC60226A6B7C400C4673E /* Symbols.swift */; };
+		9C5FC60526A6B7D700C4673E /* PaymentFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC60426A6B7D700C4673E /* PaymentFrequency.swift */; };
 		9C6B26B9268FDD2400E4D428 /* SubTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6B26B8268FDD2400E4D428 /* SubTrackApp.swift */; };
 		9C6B26BB268FDD2400E4D428 /* AllSubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6B26BA268FDD2400E4D428 /* AllSubscriptionsView.swift */; };
 		9C6B26BD268FDD2600E4D428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6B26BC268FDD2600E4D428 /* Assets.xcassets */; };
@@ -31,6 +34,9 @@
 		9C27CA6E26A1158500FAFC64 /* SubscriptionListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListCard.swift; sourceTree = "<group>"; };
 		9C27CA7026A1182A00FAFC64 /* SubscriptionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCard.swift; sourceTree = "<group>"; };
 		9C27CA7226A1186E00FAFC64 /* UpcomingCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingCards.swift; sourceTree = "<group>"; };
+		9C5FC60026A6B7AA00C4673E /* Upcoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming.swift; sourceTree = "<group>"; };
+		9C5FC60226A6B7C400C4673E /* Symbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
+		9C5FC60426A6B7D700C4673E /* PaymentFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFrequency.swift; sourceTree = "<group>"; };
 		9C6B26B5268FDD2400E4D428 /* SubTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C6B26B8268FDD2400E4D428 /* SubTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTrackApp.swift; sourceTree = "<group>"; };
 		9C6B26BA268FDD2400E4D428 /* AllSubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSubscriptionsView.swift; sourceTree = "<group>"; };
@@ -93,6 +99,9 @@
 				9C27CA6E26A1158500FAFC64 /* SubscriptionListCard.swift */,
 				9C27CA7026A1182A00FAFC64 /* SubscriptionCard.swift */,
 				9C27CA7226A1186E00FAFC64 /* UpcomingCards.swift */,
+				9C5FC60026A6B7AA00C4673E /* Upcoming.swift */,
+				9C5FC60226A6B7C400C4673E /* Symbols.swift */,
+				9C5FC60426A6B7D700C4673E /* PaymentFrequency.swift */,
 			);
 			path = SubTrack;
 			sourceTree = "<group>";
@@ -175,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CA45FA2269402F3008344A4 /* Date+Ext.swift in Sources */,
+				9C5FC60326A6B7C400C4673E /* Symbols.swift in Sources */,
 				9C6B26BB268FDD2400E4D428 /* AllSubscriptionsView.swift in Sources */,
 				9C9E0EDE269198EE006445CF /* SubTrackViewModel.swift in Sources */,
 				9C27CA7326A1186E00FAFC64 /* UpcomingCards.swift in Sources */,
@@ -182,9 +192,11 @@
 				9C27CA6B26A1138E00FAFC64 /* AddButton.swift in Sources */,
 				9C27CA6F26A1158500FAFC64 /* SubscriptionListCard.swift in Sources */,
 				9CA45F9E2693A69E008344A4 /* AddSubscriptionView.swift in Sources */,
+				9C5FC60526A6B7D700C4673E /* PaymentFrequency.swift in Sources */,
 				9C6B26CC268FF76000E4D428 /* SubTrackTabView.swift in Sources */,
 				9C6B26CA268FF74000E4D428 /* UpcomingSubscriptionsView.swift in Sources */,
 				9C6B26B9268FDD2400E4D428 /* SubTrackApp.swift in Sources */,
+				9C5FC60126A6B7AA00C4673E /* Upcoming.swift in Sources */,
 				9C27CA6D26A114EF00FAFC64 /* TotalCard.swift in Sources */,
 				9C6B26CE26901F2E00E4D428 /* Subscription.swift in Sources */,
 				9CA45FA02693AF22008344A4 /* XDismissButton.swift in Sources */,

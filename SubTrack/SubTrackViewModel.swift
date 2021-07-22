@@ -53,11 +53,34 @@ final class SubTrackViewModel: ObservableObject {
     func addSubscription() {
         guard let priceDouble = Double(subPrice) else { return } // return error
         
+        var paymentDate = Date()
+        
+        switch paymentFreqPicked {
+        case 0:
+            paymentDate = subDate.nextWeek()
+            
+        case 1:
+            paymentDate = subDate.nextMonth()
+        
+        case 2:
+            paymentDate = subDate.nextQuarter()
+            
+        case 3:
+            paymentDate = subDate.nextHalfYear()
+            
+        case 4 :
+            paymentDate = subDate.nextYear()
+            
+        default:
+            paymentDate = subDate.nextMonth()
+        }
+        
         let newSub = Subscription(serviceName: subName,
-                                  paymentFrequency: PaymentFrequency.allCases[paymentFreqPicked].rawValue,
-                                  serviceSymbol: Symbols.allCases[symbolPicked].rawValue,
+                                  paymentFrequency: PaymentFrequency.allCases[paymentFreqPicked],
+                                  serviceSymbol: Symbols.allCases[symbolPicked],
                                   price: priceDouble,
-                                  paymentDateString: subDate.toString())
+                                  subStartDate: subDate,
+                                  paymentDate: paymentDate)
         
         subscriptions.append(newSub)
         sortedSubscriptions.append(newSub)
@@ -113,6 +136,14 @@ final class SubTrackViewModel: ObservableObject {
         sortedSubscriptions = subscriptions
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
         filterSubscriptions()
+        
+        //Debugging
+        subscriptions.map { printPaymentDates($0) }
     }
     
+    //Debugging functions
+    func printPaymentDates(_ subscription: Subscription) {
+        print("payment date for \(subscription.serviceName) is \(subscription.paymentDate)")
+        print("next payment date for \(subscription.serviceName) is \(subscription.nextPaymentDate)")
+    }
 }

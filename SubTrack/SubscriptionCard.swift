@@ -13,7 +13,7 @@ struct SubscriptionCard: View {
     
     var body: some View {
         HStack{
-            Image(systemName: subscription.serviceSymbol)
+            Image(systemName: subscription.serviceSymbol.rawValue)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50, height: 50)
@@ -23,7 +23,7 @@ struct SubscriptionCard: View {
                     .font(.title2)
                     .fontWeight(.medium)
                 
-                Text(subscription.paymentFrequency)
+                Text(subscription.paymentFrequency.rawValue)
                     .font(.body)
                     .italic()
             }.padding(.leading)
@@ -41,8 +41,8 @@ struct SubscriptionCard: View {
     }
 }
 
-struct SubscriptionCard_Previews: PreviewProvider {
-    static var previews: some View {
-        SubscriptionCard(subscription: MockData.service1)
-    }
-}
+//struct SubscriptionCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SubscriptionCard(subscription: MockData.service1)
+//    }
+//}

@@ -39,7 +39,7 @@ struct SubscriptionListCardCell: View {
     
     var body: some View {
         HStack{
-            Image(systemName: subscription.serviceSymbol)
+            Image(systemName: subscription.serviceSymbol.rawValue)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40)
@@ -49,7 +49,7 @@ struct SubscriptionListCardCell: View {
                     .font(.title3)
                     .fontWeight(.medium)
                 
-                Text(subscription.paymentFrequency)
+                Text(subscription.paymentFrequency.rawValue)
                     .font(.body)
                     .italic()
             }.padding(.leading, 10)
