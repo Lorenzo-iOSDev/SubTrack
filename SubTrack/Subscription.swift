@@ -8,6 +8,7 @@
 import Foundation
 
 class Subscription: Identifiable, Codable{
+    
     var id = UUID()
     
     let serviceName: String
@@ -16,52 +17,7 @@ class Subscription: Identifiable, Codable{
     let price: Double
     let subStartDate: Date
     
-    var paymentDate: Date// {
-//        var newPaymentDate = Date()
-//
-//        if paymentIsDue {
-//            switch paymentFrequency {
-//            case .Weekly:
-//                newPaymentDate = self.paymentDate.nextWeek()
-//            case .Monthly:
-//                newPaymentDate = self.paymentDate.nextMonth()
-//            case .Quarterly:
-//                newPaymentDate = self.paymentDate.nextQuarter()
-//            case .BiAnnually:
-//                newPaymentDate = self.paymentDate.nextHalfYear()
-//            case .Annually:
-//                newPaymentDate = self.paymentDate.nextYear()
-//            }
-//        }
-//
-//        return newPaymentDate
-//    }
-    
-    var nextPaymentDate : Date {
-        var newPaymentDate = Date()
-
-        if paymentIsDue {
-            switch paymentFrequency {
-            case .Weekly:
-                newPaymentDate = paymentDate.nextWeek()
-                self.paymentDate = newPaymentDate
-            case .Monthly:
-                newPaymentDate = paymentDate.nextMonth()
-                self.paymentDate = newPaymentDate
-            case .Quarterly:
-                newPaymentDate = paymentDate.nextQuarter()
-                self.paymentDate = newPaymentDate
-            case .BiAnnually:
-                newPaymentDate = paymentDate.nextHalfYear()
-                self.paymentDate = newPaymentDate
-            case .Annually:
-                newPaymentDate = paymentDate.nextYear()
-                self.paymentDate = newPaymentDate
-            }
-        }
-
-        return newPaymentDate
-    }
+    var paymentDate: Date
     
     var paymentIsDue: Bool {
         let calendar = Calendar.autoupdatingCurrent
@@ -133,49 +89,23 @@ class Subscription: Identifiable, Codable{
         self.paymentDate = paymentDate
     }
     
-//    mutating func updatePaymentDate() {
-////        let dateFormatter = DateFormatter()
-////        dateFormatter.dateFormat = "dd/MM/yyyy"
-//
-//        if (firstPaymentDateSet == false) {
-//            //if let startDate = dateFormatter.date(from: subStartDate) {
-//                var nextPaymentDate = Date()
-//
-//                switch paymentFrequency {
-//                    case .Weekly:
-//                        nextPaymentDate = subStartDate.nextWeek()
-//                    case .Monthly:
-//                        nextPaymentDate = subStartDate.nextMonth()
-//                    case .Quarterly:
-//                        nextPaymentDate = subStartDate.nextQuarter()
-//                    case .BiAnnually:
-//                        nextPaymentDate = subStartDate.nextHalfYear()
-//                    case .Annually:
-//                        nextPaymentDate = subStartDate.nextYear()
-//                    }
-//
-//                self.paymentDate = nextPaymentDate
-//                self.firstPaymentDateSet = true
-//        } else {
-//                var nextPaymentDate = Date()
-//
-//                switch paymentFrequency {
-//                    case .Weekly:
-//                        nextPaymentDate = paymentDate.nextWeek()
-//                    case .Monthly:
-//                        nextPaymentDate = paymentDate.nextMonth()
-//                    case .Quarterly:
-//                        nextPaymentDate = paymentDate.nextQuarter()
-//                    case .BiAnnually:
-//                        nextPaymentDate = paymentDate.nextHalfYear()
-//                    case .Annually:
-//                        nextPaymentDate = paymentDate.nextYear()
-//                    }
-//
-//                self.paymentDate = nextPaymentDate
-//
-//        }
-//    }
+    func updatePayment() {
+        
+        if paymentIsDue {
+            switch paymentFrequency {
+            case .Weekly:
+                paymentDate = paymentDate.nextWeek()
+            case .Monthly:
+                paymentDate = paymentDate.nextMonth()
+            case .Quarterly:
+                paymentDate = paymentDate.nextQuarter()
+            case .BiAnnually:
+                paymentDate = paymentDate.nextHalfYear()
+            case .Annually:
+                paymentDate = paymentDate.nextYear()
+            }
+        }
+    }
 }
 
 //struct MockData {

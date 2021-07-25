@@ -133,6 +133,9 @@ final class SubTrackViewModel: ObservableObject {
             print("Failed to Load: Invalid Data")
         }
         
+        //check for paymentUpdates
+        checkForPaymentDates()
+        
         sortedSubscriptions = subscriptions
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
         filterSubscriptions()
@@ -141,9 +144,28 @@ final class SubTrackViewModel: ObservableObject {
         subscriptions.map { printPaymentDates($0) }
     }
     
+    func checkForPaymentDates() {
+        let dueUpdates = subscriptions.filter { $0.paymentIsDue } // this works because since Subscription is a class and not a Struct, it is referenced instead of copied.
+        
+        if !dueUpdates.isEmpty {
+            //print(dueUpdates)
+            
+            for update in dueUpdates {
+                print(update.paymentDate)
+                
+                update.updatePayment()
+                
+                print(update.paymentDate)
+                
+                saveSubscriptions()
+            }
+        }
+        
+    }
+    
     //Debugging functions
     func printPaymentDates(_ subscription: Subscription) {
         print("payment date for \(subscription.serviceName) is \(subscription.paymentDate)")
-        print("next payment date for \(subscription.serviceName) is \(subscription.nextPaymentDate)")
+        //print("next payment date for \(subscription.serviceName) is \(subscription.nextPaymentDate)")
     }
 }
