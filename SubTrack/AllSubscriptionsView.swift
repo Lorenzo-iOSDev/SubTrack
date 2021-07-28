@@ -40,8 +40,7 @@ struct AllSubscriptionsView: View {
                 }
             }
             .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
-                AddSubscriptionView(viewModel: viewModel)
-        })
+                AddSubscriptionView(viewModel: viewModel)})
         }
         .onAppear() {
             viewModel.retrieveSubscriptions()
@@ -53,5 +52,17 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         AllSubscriptionsView(viewModel: SubTrackViewModel())
             
+    }
+}
+
+struct AllSubsEmptyState: View {
+    
+    var body: some View {
+        VStack {
+            Text("Press + to add a \n new subscription")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .padding()
+        }
     }
 }

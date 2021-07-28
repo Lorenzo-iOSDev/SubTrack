@@ -14,7 +14,7 @@ final class SubTrackViewModel: ObservableObject {
     
     //Subscription Arrays
     @Published var subscriptions: [Subscription] = [] // should be empty array, using mock data to test
-    var sortedSubscriptions: [Subscription] = []
+    @Published var sortedSubscriptions: [Subscription] = []
     
     //Upcoming Subscriptions Arrays
     @Published var today: [Subscription] = []
@@ -83,7 +83,7 @@ final class SubTrackViewModel: ObservableObject {
                                   paymentDate: paymentDate)
         
         subscriptions.append(newSub)
-        sortedSubscriptions.append(newSub)
+        sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
         filterSubscriptions()
         
@@ -136,12 +136,14 @@ final class SubTrackViewModel: ObservableObject {
         //check for paymentUpdates
         checkForPaymentDates()
         
-        sortedSubscriptions = subscriptions
+        sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
         filterSubscriptions()
         
         //Debugging
-        subscriptions.map { printPaymentDates($0) }
+        print(Date().startOfWeek())
+        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
+        print("\n \n sortedSubscription size: \(sortedSubscriptions.count)")
     }
     
     func checkForPaymentDates() {
@@ -167,5 +169,9 @@ final class SubTrackViewModel: ObservableObject {
     func printPaymentDates(_ subscription: Subscription) {
         print("payment date for \(subscription.serviceName) is \(subscription.paymentDate)")
         //print("next payment date for \(subscription.serviceName) is \(subscription.nextPaymentDate)")
+    }
+    
+    func printSubscriptionUpcomingClassifiers(_ subscription: Subscription) {
+        print("upcoming classifier for \(subscription.serviceName) is \(String(describing: subscription.upcomingClassifier?.rawValue))")
     }
 }

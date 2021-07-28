@@ -20,7 +20,7 @@ struct AddSubscriptionView: View {
                         Section(header: Text("Subscription Details")) {
                             TextField("Name", text: $viewModel.subName)
                             TextField("Price", text: $viewModel.subPrice)
-                            DatePicker("Payment Date", selection: $viewModel.subDate, displayedComponents: [.date])
+                            DatePicker("Payment Date", selection: $viewModel.subDate, in: Date().oneHundredYearsAgo...Date(), displayedComponents: .date)
                             Picker("Payment Frequency", selection: $viewModel.paymentFreqPicked) {
                                 ForEach(PaymentFrequency.allCases.indices) { index in
                                     Text(PaymentFrequency.allCases[index].rawValue)

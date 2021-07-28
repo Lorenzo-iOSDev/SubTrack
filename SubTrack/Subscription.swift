@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Subscription: Identifiable, Codable{
+final class Subscription: Identifiable, Codable{
     
     var id = UUID()
     
@@ -20,11 +20,9 @@ class Subscription: Identifiable, Codable{
     var paymentDate: Date
     
     var paymentIsDue: Bool {
-        let calendar = Calendar.autoupdatingCurrent
+        let today = Date()
         
-        //guard let paymentDate = paymentDate else { return nil } // return error alert
-        
-        if (calendar.isDateInYesterday(paymentDate)) {
+        if (paymentDate < today) {
             return true
         }
         
@@ -36,8 +34,6 @@ class Subscription: Identifiable, Codable{
     var upcomingClassifier: Upcoming? {
         let calendar = Calendar.autoupdatingCurrent
         let currentDate = Date()
-        
-        //guard let paymentDate = paymentDate else { return nil } //return error alert
         
         let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: paymentDate)
         let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)

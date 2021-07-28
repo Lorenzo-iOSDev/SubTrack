@@ -33,8 +33,18 @@ struct UpcomingSubscriptionsView: View {
                 .padding(.horizontal, 10)
                 .padding(.top, 10)
                 
-                ScrollView {
-                    UpcomingCards(viewModel: viewModel)
+                //Check if sortedSubscriptions array is nil or not
+                //If Nil then show Empty State
+                if (viewModel.sortedSubscriptions.count != 0) {
+                    ScrollView {
+                        UpcomingCards(viewModel: viewModel)
+                    }
+                } else {
+                    Spacer()
+                    
+                    UpcomingEmptyState()
+                    
+                    Spacer()
                 }
             }
             .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
@@ -50,5 +60,17 @@ struct UpcomingSubscriptionsView: View {
 struct UpcomingSubscriptionsView_Previews: PreviewProvider {
     static var previews: some View {
         UpcomingSubscriptionsView(viewModel: SubTrackViewModel())
+    }
+}
+
+struct UpcomingEmptyState: View {
+    
+    var body: some View {
+        VStack {
+            Text("No more upcoming \n payments this month.")
+                .multilineTextAlignment(.center)
+                .font(.title)
+                .padding()
+        }
     }
 }
