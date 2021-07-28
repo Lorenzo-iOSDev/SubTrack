@@ -45,6 +45,7 @@ struct AllSubscriptionsView: View {
         .onAppear() {
             viewModel.retrieveSubscriptions()
         }
+        .overlay(AllSubsEmptyState(viewModel: viewModel))
     }
 }
 
@@ -57,12 +58,16 @@ struct ContentView_Previews: PreviewProvider {
 
 struct AllSubsEmptyState: View {
     
+    @ObservedObject var viewModel : SubTrackViewModel
+    
     var body: some View {
-        VStack {
-            Text("Press + to add a \n new subscription")
-                .multilineTextAlignment(.center)
-                .font(.title)
-                .padding()
+        if viewModel.subscriptions.count == 0 {
+                VStack {
+                    Text("Press + to add a \n new subscription")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                        .padding()
+                }
         }
     }
 }

@@ -35,24 +35,27 @@ final class Subscription: Identifiable, Codable{
         let calendar = Calendar.autoupdatingCurrent
         let currentDate = Date()
         
-        let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: paymentDate)
-        let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
+        let paymentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.weekOfMonth ,Calendar.Component.month, Calendar.Component.year], from: paymentDate)
+        let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.weekOfMonth ,Calendar.Component.month, Calendar.Component.year], from: currentDate)
         
-        guard let dateCompsDay = dateComponents.day else { return nil } //return error alert
+        guard let dateCompsDay = paymentDateComponents.day else { return nil } //return error alert
         guard let currentDateCompsDay = currentDateComponents.day else { return nil } //return error alert
         
         let differenceInDays = dateCompsDay - currentDateCompsDay
         
-        guard let dateCompsMonth = dateComponents.month else { return nil } //return error alert
+        guard let dateCompsMonth = paymentDateComponents.month else { return nil } //return error alert
         guard let currentDateCompsMonth = currentDateComponents.month else { return nil } //return error alert
         
         let differenceInMonths = dateCompsMonth - currentDateCompsMonth
+        
+        guard let dateCompsWeekOfMonth = paymentDateComponents.weekOfMonth else { return nil }
+        guard let currentDateCompsWeekOfMonth = currentDateComponents.weekOfMonth else { return nil }
         
         if differenceInDays == 0 && differenceInMonths == 0 {
             return Upcoming.Today
         } else if differenceInDays == 1 && differenceInMonths == 0 {
             return Upcoming.Tomorrow
-        } else if differenceInDays <= 7 && differenceInDays > 0 && differenceInMonths == 0 {
+        } else if differenceInDays <= 7 && differenceInDays > 0 && dateCompsWeekOfMonth == currentDateCompsWeekOfMonth && differenceInMonths == 0 {
             return Upcoming.ThisWeek
         } else if differenceInDays > 7 && differenceInMonths == 0 {
             return Upcoming.ThisMonth
