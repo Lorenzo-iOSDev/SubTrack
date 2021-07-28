@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SubscriptionListCard: View {
+    
     @ObservedObject var viewModel: SubTrackViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         List{
@@ -22,7 +24,7 @@ struct SubscriptionListCard: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(Color(.systemBackground)))
+                .foregroundColor(Color(colorScheme == .dark ? .secondarySystemBackground : .systemBackground)))
         .padding(.horizontal, 10)
     }
 }

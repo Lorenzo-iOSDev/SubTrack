@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SubscriptionCard: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var subscription: Subscription
     
     var body: some View {
@@ -36,7 +38,7 @@ struct SubscriptionCard: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(Color(.systemBackground)))
+                .foregroundColor(Color(colorScheme == .dark ? .secondarySystemBackground : .systemBackground)))
         .padding(.horizontal, 10)
     }
 }

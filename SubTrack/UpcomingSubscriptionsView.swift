@@ -10,10 +10,11 @@ import SwiftUI
 struct UpcomingSubscriptionsView: View {
     
     @ObservedObject var viewModel: SubTrackViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
-            Color(.secondarySystemBackground)
+            Color(colorScheme == .dark ? .systemBackground : .secondarySystemBackground)
                 .ignoresSafeArea()
             
             VStack {

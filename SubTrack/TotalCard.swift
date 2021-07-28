@@ -9,7 +9,8 @@ import SwiftUI
 
 struct TotalCard: View {
     
-    var viewModel: SubTrackViewModel
+    @ObservedObject var viewModel: SubTrackViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         Button {
@@ -28,7 +29,7 @@ struct TotalCard: View {
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 10.0)
-                    .foregroundColor(Color(.systemBackground)))
+                    .foregroundColor(Color(colorScheme == .dark ? .secondarySystemBackground : .systemBackground)))
             .padding(10)
             .padding(.bottom, 15)
         }
