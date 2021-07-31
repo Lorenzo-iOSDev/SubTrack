@@ -10,10 +10,14 @@ import SwiftUI
 struct AddSubscriptionView: View {
     
     @ObservedObject var viewModel: SubTrackViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationView {
             ZStack {
+                Color(colorScheme == .dark ? .systemBackground : .secondarySystemBackground)
+                    .ignoresSafeArea()
+                
                 VStack {
                     Form {
                         

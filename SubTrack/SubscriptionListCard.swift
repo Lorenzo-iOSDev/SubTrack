@@ -20,6 +20,10 @@ struct SubscriptionListCard: View {
             .onDelete(perform: { indexSet in
                 viewModel.deleteSubscription(at: indexSet)
             })
+            .listRowBackground(Color(colorScheme == .dark ? .secondarySystemBackground : .systemBackground))
+        }
+        .onAppear {
+            UITableView.appearance().backgroundColor = .clear
         }
         .padding()
         .background(

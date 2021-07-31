@@ -20,9 +20,12 @@ final class Subscription: Identifiable, Codable{
     var paymentDate: Date
     
     var paymentIsDue: Bool {
-        let today = Date()
+        let calendar = Calendar.autoupdatingCurrent
+        
+        let today = calendar.startOfDay(for: Date())
         
         if (paymentDate < today) {
+            print("Payment date is \(paymentDate)")
             return true
         }
         
