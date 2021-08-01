@@ -107,6 +107,7 @@ final class SubTrackViewModel: ObservableObject {
         subscriptions.remove(atOffsets: offsets)
         
         saveSubscriptions()
+        retrieveSubscriptions()
     }
     
     func saveSubscriptions() {
@@ -141,9 +142,9 @@ final class SubTrackViewModel: ObservableObject {
         filterSubscriptions()
         
         //Debugging
-        print(Date().startOfWeek())
-        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
-        print("\n \n sortedSubscription size: \(sortedSubscriptions.count)")
+//        print(Date().startOfWeek())
+//        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
+//        print("\n \n sortedSubscription size: \(sortedSubscriptions.count)")
     }
     
     func checkForPaymentDates() {

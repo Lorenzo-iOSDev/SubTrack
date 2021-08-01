@@ -82,26 +82,14 @@
 		9C6B26B7268FDD2400E4D428 /* SubTrack */ = {
 			isa = PBXGroup;
 			children = (
+				9CE8578926B69B79001D7A3E /* Utilities */,
+				9CE8578526B6971D001D7A3E /* Views */,
+				9CE8578426B696F8001D7A3E /* Models */,
+				9CE8578326B696F0001D7A3E /* Screens */,
 				9C6B26B8268FDD2400E4D428 /* SubTrackApp.swift */,
-				9C6B26CB268FF76000E4D428 /* SubTrackTabView.swift */,
-				9C6B26BA268FDD2400E4D428 /* AllSubscriptionsView.swift */,
-				9C9E0EDD269198EE006445CF /* SubTrackViewModel.swift */,
-				9C6B26C9268FF74000E4D428 /* UpcomingSubscriptionsView.swift */,
-				9C6B26CD26901F2E00E4D428 /* Subscription.swift */,
 				9C6B26BC268FDD2600E4D428 /* Assets.xcassets */,
 				9C6B26C1268FDD2600E4D428 /* Info.plist */,
 				9C6B26BE268FDD2600E4D428 /* Preview Content */,
-				9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */,
-				9CA45F9F2693AF22008344A4 /* XDismissButton.swift */,
-				9CA45FA1269402F3008344A4 /* Date+Ext.swift */,
-				9C27CA6A26A1138E00FAFC64 /* AddButton.swift */,
-				9C27CA6C26A114EF00FAFC64 /* TotalCard.swift */,
-				9C27CA6E26A1158500FAFC64 /* SubscriptionListCard.swift */,
-				9C27CA7026A1182A00FAFC64 /* SubscriptionCard.swift */,
-				9C27CA7226A1186E00FAFC64 /* UpcomingCards.swift */,
-				9C5FC60026A6B7AA00C4673E /* Upcoming.swift */,
-				9C5FC60226A6B7C400C4673E /* Symbols.swift */,
-				9C5FC60426A6B7D700C4673E /* PaymentFrequency.swift */,
 			);
 			path = SubTrack;
 			sourceTree = "<group>";
@@ -112,6 +100,138 @@
 				9C6B26BF268FDD2600E4D428 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9CE8578326B696F0001D7A3E /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				9C6B26CB268FF76000E4D428 /* SubTrackTabView.swift */,
+				9C9E0EDD269198EE006445CF /* SubTrackViewModel.swift */,
+				9CE8578626B69ADA001D7A3E /* AllSubscriptionsView */,
+				9CE8578726B69AE7001D7A3E /* UpcomingSubscriptionsView */,
+				9CE8578826B69AF4001D7A3E /* AddSubscriptionsView */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		9CE8578426B696F8001D7A3E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9C6B26CD26901F2E00E4D428 /* Subscription.swift */,
+				9C5FC60026A6B7AA00C4673E /* Upcoming.swift */,
+				9C5FC60226A6B7C400C4673E /* Symbols.swift */,
+				9C5FC60426A6B7D700C4673E /* PaymentFrequency.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9CE8578526B6971D001D7A3E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9CE8578F26B69E41001D7A3E /* Cards */,
+				9CE8578C26B69DB9001D7A3E /* EmptyStates */,
+				9CE8578B26B69C24001D7A3E /* Buttons */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9CE8578626B69ADA001D7A3E /* AllSubscriptionsView */ = {
+			isa = PBXGroup;
+			children = (
+				9C6B26BA268FDD2400E4D428 /* AllSubscriptionsView.swift */,
+			);
+			path = AllSubscriptionsView;
+			sourceTree = "<group>";
+		};
+		9CE8578726B69AE7001D7A3E /* UpcomingSubscriptionsView */ = {
+			isa = PBXGroup;
+			children = (
+				9C6B26C9268FF74000E4D428 /* UpcomingSubscriptionsView.swift */,
+			);
+			path = UpcomingSubscriptionsView;
+			sourceTree = "<group>";
+		};
+		9CE8578826B69AF4001D7A3E /* AddSubscriptionsView */ = {
+			isa = PBXGroup;
+			children = (
+				9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */,
+			);
+			path = AddSubscriptionsView;
+			sourceTree = "<group>";
+		};
+		9CE8578926B69B79001D7A3E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9CE8578A26B69B84001D7A3E /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9CE8578A26B69B84001D7A3E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9CA45FA1269402F3008344A4 /* Date+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9CE8578B26B69C24001D7A3E /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				9CA45F9F2693AF22008344A4 /* XDismissButton.swift */,
+				9C27CA6A26A1138E00FAFC64 /* AddButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		9CE8578C26B69DB9001D7A3E /* EmptyStates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EmptyStates;
+			sourceTree = "<group>";
+		};
+		9CE8578D26B69E22001D7A3E /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				9C27CA7026A1182A00FAFC64 /* SubscriptionCard.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		9CE8578E26B69E2F001D7A3E /* SubscriptionList */ = {
+			isa = PBXGroup;
+			children = (
+				9C27CA6E26A1158500FAFC64 /* SubscriptionListCard.swift */,
+			);
+			path = SubscriptionList;
+			sourceTree = "<group>";
+		};
+		9CE8578F26B69E41001D7A3E /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				9CE8579126B69F12001D7A3E /* Upcoming */,
+				9CE8578D26B69E22001D7A3E /* Subscription */,
+				9CE8578E26B69E2F001D7A3E /* SubscriptionList */,
+				9CE8579026B69E68001D7A3E /* Total */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		9CE8579026B69E68001D7A3E /* Total */ = {
+			isa = PBXGroup;
+			children = (
+				9C27CA6C26A114EF00FAFC64 /* TotalCard.swift */,
+			);
+			path = Total;
+			sourceTree = "<group>";
+		};
+		9CE8579126B69F12001D7A3E /* Upcoming */ = {
+			isa = PBXGroup;
+			children = (
+				9C27CA7226A1186E00FAFC64 /* UpcomingCards.swift */,
+			);
+			path = Upcoming;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
