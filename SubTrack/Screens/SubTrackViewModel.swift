@@ -152,7 +152,6 @@ final class SubTrackViewModel: ObservableObject {
         let dueUpdates = subscriptions.filter { $0.paymentIsDue } // this works because since Subscription is a class and not a Struct, it is referenced instead of copied.
         
         if !dueUpdates.isEmpty {
-            //print(dueUpdates)
             
             for update in dueUpdates {
                 //print(update.paymentDate)
@@ -170,7 +169,6 @@ final class SubTrackViewModel: ObservableObject {
     //Debugging functions
     func printPaymentDates(_ subscription: Subscription) {
         print("payment date for \(subscription.serviceName) is \(subscription.paymentDate)")
-        //print("next payment date for \(subscription.serviceName) is \(subscription.nextPaymentDate)")
     }
     
     func printSubscriptionUpcomingClassifiers(_ subscription: Subscription) {

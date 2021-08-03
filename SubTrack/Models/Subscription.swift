@@ -32,8 +32,6 @@ final class Subscription: Identifiable, Codable{
         return false
     }
     
-    var firstPaymentDateSet: Bool = false
-    
     var upcomingClassifier: Upcoming? {
         let calendar = Calendar.autoupdatingCurrent
         let currentDate = Date()
@@ -93,7 +91,7 @@ final class Subscription: Identifiable, Codable{
     
     func updatePayment() {
         
-        if paymentIsDue {
+        while paymentIsDue {
             switch paymentFrequency {
             case .Weekly:
                 paymentDate = paymentDate.nextWeek()
