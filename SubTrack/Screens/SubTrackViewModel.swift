@@ -143,7 +143,8 @@ final class SubTrackViewModel: ObservableObject {
         
         //Debugging
 //        print(Date().startOfWeek())
-//        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
+        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
+        subscriptions.map { printPaymentDates($0) }
 //        print("\n \n sortedSubscription size: \(sortedSubscriptions.count)")
     }
     
@@ -154,7 +155,7 @@ final class SubTrackViewModel: ObservableObject {
             //print(dueUpdates)
             
             for update in dueUpdates {
-                print(update.paymentDate)
+                //print(update.paymentDate)
                 
                 update.updatePayment()
                 
