@@ -58,9 +58,9 @@ final class Subscription: Identifiable, Codable{
             return Upcoming.Today
         } else if differenceInDays == 1 && differenceInMonths == 0 {
             return Upcoming.Tomorrow
-        } else if differenceInDays <= 7 && differenceInDays > 0 && dateCompsWeekOfMonth == currentDateCompsWeekOfMonth && differenceInMonths == 0 {
+        } else if differenceInDays <= 7 && dateCompsWeekOfMonth == currentDateCompsWeekOfMonth && differenceInMonths == 0 {
             return Upcoming.ThisWeek
-        } else if differenceInDays > 7 && differenceInMonths == 0 {
+        } else if dateCompsWeekOfMonth != currentDateCompsWeekOfMonth && differenceInMonths == 0 {
             return Upcoming.ThisMonth
         }
         
