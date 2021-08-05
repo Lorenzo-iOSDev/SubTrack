@@ -123,8 +123,6 @@ final class SubTrackViewModel: ObservableObject {
     }
     
     func saveSubscriptions() {
-        //check if form is valid before saving
-        
         do {
             let data = try JSONEncoder().encode(subscriptions)
             subscriptionsData = data
@@ -134,10 +132,8 @@ final class SubTrackViewModel: ObservableObject {
     }
     
     func retrieveSubscriptions() {
-        guard let subscriptionsData = subscriptionsData else {
-            alertItem = AlertContext.invalidRetrieval
-            return
-        }
+        
+        guard let subscriptionsData = subscriptionsData else { return } // fail silently as if it is Nil then there was no saved data in the first place
         
         do {
             subscriptions = try JSONDecoder().decode([Subscription].self, from: subscriptionsData)
