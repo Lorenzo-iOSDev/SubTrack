@@ -25,15 +25,11 @@ struct AddSubscriptionView: View {
                             }
                         }
                     }
+                    
                     Section(header: Text("Subscription Icon")) {
-                        Picker("Pick Icon", selection: $viewModel.symbolPicked) {
-                            ForEach(Symbols.allCases.indices) { index in
-                                Image(systemName: Symbols.allCases[index].rawValue)
-                                    .imageScale(.large)
-                                    .frame(width: 44, height: 44)
-                            }
-                        }
+                        NavigationLink("Pick Icon", destination: IconPickerView(viewModel: viewModel))
                     }
+                    
                     Section {
                         Button {
                             viewModel.addSubscription()

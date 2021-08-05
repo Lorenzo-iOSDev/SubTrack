@@ -47,6 +47,11 @@ struct AllSubscriptionsView: View {
             viewModel.retrieveSubscriptions()
         }
         .overlay(AllSubsEmptyState(viewModel: viewModel))
+        .alert(item: $viewModel.alertItem) { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
+        }
     }
 }
 

@@ -25,12 +25,21 @@ final class SubTrackViewModel: ObservableObject {
     //View Dependent bool
     @Published var isShowingAddSubscription = false
     
-    //AddSubscriptionView
+    //AddSubscriptionView & IconPickerView
     @Published var subName = ""
     @Published var subPrice = ""
     @Published var subDate = Date()
     @Published var paymentFreqPicked = 1
     @Published var symbolPicked = 0
+    
+    //IconPickerView
+    let columns: [GridItem] = [GridItem(.flexible()),
+                               GridItem(.flexible()),
+                               GridItem(.flexible()),
+                               GridItem(.flexible())]
+    
+    //AlertItem
+    @Published var alertItem: AlertItem?
     
     var currentDate = Date()
     
@@ -51,7 +60,10 @@ final class SubTrackViewModel: ObservableObject {
     }
     
     func addSubscription() {
-        guard let priceDouble = Double(subPrice) else { return } // return error
+        guard let priceDouble = Double(subPrice) else {
+            alertItem = AlertContext.invalidDouble
+            return
+        }
         
         var paymentDate = Date()
         
@@ -117,20 +129,20 @@ final class SubTrackViewModel: ObservableObject {
             let data = try JSONEncoder().encode(subscriptions)
             subscriptionsData = data
         } catch {
-            //AlertItem for failed saving
-            print("Failed to Save: Invalid Data")
+            alertItem = AlertContext.unableToSave
         }
     }
     
     func retrieveSubscriptions() {
         guard let subscriptionsData = subscriptionsData else {
-            return // error could not find data
+            alertItem = AlertContext.invalidRetrieval
+            return
         }
         
         do {
             subscriptions = try JSONDecoder().decode([Subscription].self, from: subscriptionsData)
         } catch {
-            //AlertItem invalid data
+            alertItem = AlertContext.invalidSavedData
             print("Failed to Load: Invalid Data")
         }
         
@@ -143,8 +155,8 @@ final class SubTrackViewModel: ObservableObject {
         
         //Debugging
 //        print(Date().startOfWeek())
-        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
-        subscriptions.map { printPaymentDates($0) }
+//        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
+//        subscriptions.map { printPaymentDates($0) }
 //        print("\n \n sortedSubscription size: \(sortedSubscriptions.count)")
     }
     
@@ -152,18 +164,11 @@ final class SubTrackViewModel: ObservableObject {
         let dueUpdates = subscriptions.filter { $0.paymentIsDue } // this works because since Subscription is a class and not a Struct, it is referenced instead of copied.
         
         if !dueUpdates.isEmpty {
-            
             for update in dueUpdates {
-                //print(update.paymentDate)
-                
                 update.updatePayment()
-                
-                print(update.paymentDate)
-                
                 saveSubscriptions()
             }
         }
-        
     }
     
     //Debugging functions
