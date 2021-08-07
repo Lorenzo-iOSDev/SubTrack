@@ -11,6 +11,6 @@ enum PaymentFrequency: String, CaseIterable, Codable {
     case Weekly = "Weekly"
     case Monthly = "Monthly"
     case Quarterly = "Quarterly"
-    case BiAnnually = "Bi-Annually"
-    case Annually = "Annually"
+    case BiAnnually = "Bi-Annual"
+    case Annually = "Annual"
 }

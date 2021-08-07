@@ -35,6 +35,7 @@ struct IconPickerView: View {
                             viewModel.symbolPicked = symbol
                         } label: {
                             Icon(systemName: Symbols.allCases[symbol].rawValue)
+                                .padding()
                         }.foregroundColor(.primary)
                     }
                     .padding(.vertical, 10)
@@ -66,6 +67,5 @@ struct Icon: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 35 * sizeMultiplier, height: 35 * sizeMultiplier)
-            .padding()
     }
 }

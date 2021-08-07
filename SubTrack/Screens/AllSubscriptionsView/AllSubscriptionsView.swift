@@ -36,12 +36,18 @@ struct AllSubscriptionsView: View {
                 
                 VStack {
                     SubscriptionListCard(viewModel: viewModel)
-                        
+                    
                     TotalCard(viewModel: viewModel)
                 }
             }
             .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
-                AddSubscriptionView(viewModel: viewModel)})
+                    AddSubscriptionView(viewModel: viewModel)})
+            
+            .blur(radius: viewModel.isShowingDetailView ? 20.0 : 0.0)
+            
+            if viewModel.isShowingDetailView {
+                SubscriptionDetailView(isShowingDetailView: $viewModel.isShowingDetailView, selectedSubscription: viewModel.selectedSubscription!)
+            }
         }
         .onAppear() {
             viewModel.retrieveSubscriptions()
@@ -52,6 +58,7 @@ struct AllSubscriptionsView: View {
                   message: alertItem.message,
                   dismissButton: alertItem.dismissButton)
         }
+        .navigationTitle("All Subscriptions")
     }
 }
 
@@ -59,6 +66,8 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         AllSubscriptionsView(viewModel: SubTrackViewModel())
             
+        AllSubscriptionsView(viewModel: SubTrackViewModel())
+            .preferredColorScheme(.dark)
     }
 }
 

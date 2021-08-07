@@ -49,7 +49,12 @@ struct AddSubscriptionView: View {
         .onDisappear {
             UITableView.appearance().backgroundColor = .clear
         }
-        .overlay(XDismissButton(isShowingAddView: $viewModel.isShowingAddSubscription), alignment: .topTrailing)
+        .overlay(
+            Button {
+                viewModel.isShowingAddSubscription = false
+            } label: {
+            XDismissButton()
+            }.padding(), alignment: .topTrailing)
     }
 }
 

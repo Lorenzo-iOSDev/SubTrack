@@ -108,7 +108,7 @@ final class Subscription: Identifiable, Codable{
     }
 }
 
-//struct MockData {
+struct MockData {
 //    static let service1 = Subscription(serviceName: "Apple TV+",
 //                                       paymentFrequency: PaymentFrequency.Monthly,
 //                                       serviceSymbol: Symbols.TV,
@@ -132,4 +132,10 @@ final class Subscription: Identifiable, Codable{
 //                                       price: 4.99, subStartDate: "23/07/2015")
 //
 //    static let services = [service1, service2, service3, service4]
-//}
+    
+    static let service1 = Subscription(serviceName: "Apple TV+",
+                                       paymentFrequency: PaymentFrequency.Monthly,
+                                       serviceSymbol: Symbols.TV,
+                                       price: 14.99,
+                                       subStartDate: Date(), paymentDate: Date())
+}

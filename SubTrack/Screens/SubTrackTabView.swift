@@ -25,11 +25,15 @@ struct SubTrackTabView: View {
                     Text("Upcoming")
                 }
         }
+        .accentColor(.primary)
     }
 }
 
 struct SubTrackTabView_Previews: PreviewProvider {
     static var previews: some View {
         SubTrackTabView()
+        
+        SubTrackTabView()
+            .preferredColorScheme(.dark)
     }
 }

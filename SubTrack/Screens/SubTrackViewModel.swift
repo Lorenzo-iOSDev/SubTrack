@@ -22,8 +22,9 @@ final class SubTrackViewModel: ObservableObject {
     @Published var thisWeek: [Subscription] = []
     @Published var thisMonth: [Subscription] = []
     
-    //View Dependent bool
+    //View Dependent bools
     @Published var isShowingAddSubscription = false
+    @Published var isShowingDetailView = false
     
     //AddSubscriptionView & IconPickerView
     @Published var subName = ""
@@ -37,6 +38,9 @@ final class SubTrackViewModel: ObservableObject {
                                GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
+    
+    //SubscriptionDetailView
+    @Published var selectedSubscription: Subscription?
     
     //AlertItem
     @Published var alertItem: AlertItem?

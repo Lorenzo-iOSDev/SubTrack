@@ -16,6 +16,11 @@ struct SubscriptionListCard: View {
         List{
             ForEach(viewModel.subscriptions) { service in
                 SubscriptionListCardCell(subscription: service)
+                    .onTapGesture {
+                        print("tapped on \(service.serviceName)")
+                        viewModel.isShowingDetailView = true
+                        viewModel.selectedSubscription = service
+                    }
             }
             .onDelete(perform: { indexSet in
                 viewModel.deleteSubscription(at: indexSet)
