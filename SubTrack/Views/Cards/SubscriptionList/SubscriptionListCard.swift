@@ -16,6 +16,7 @@ struct SubscriptionListCard: View {
         List{
             ForEach(viewModel.subscriptions) { service in
                 SubscriptionListCardCell(subscription: service)
+                    .contentShape(Rectangle()) // fixes onTapGesture not working with empty spaces.
                     .onTapGesture {
                         print("tapped on \(service.serviceName)")
                         viewModel.isShowingDetailView = true
@@ -27,6 +28,7 @@ struct SubscriptionListCard: View {
             })
             .listRowBackground(Color(colorScheme == .dark ? .secondarySystemBackground : .systemBackground))
         }
+        .disabled(viewModel.isShowingDetailView)
         .onAppear {
             UITableView.appearance().backgroundColor = .clear
         }
