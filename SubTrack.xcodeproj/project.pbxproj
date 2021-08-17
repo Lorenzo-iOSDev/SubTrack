@@ -30,6 +30,7 @@
 		9CA45F9E2693A69E008344A4 /* AddSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */; };
 		9CA45FA02693AF22008344A4 /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45F9F2693AF22008344A4 /* XDismissButton.swift */; };
 		9CA45FA2269402F3008344A4 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45FA1269402F3008344A4 /* Date+Ext.swift */; };
+		9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionView.swift; sourceTree = "<group>"; };
 		9CA45F9F2693AF22008344A4 /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
 		9CA45FA1269402F3008344A4 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSubscriptionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +133,17 @@
 			isa = PBXGroup;
 			children = (
 				9C84ED2726BCB67000B5F2B5 /* SubscriptionDetailView.swift */,
+				9CC9C7C226C123250058D5F8 /* EditSubscriptionView */,
 			);
 			path = SubscriptionDetailView;
+			sourceTree = "<group>";
+		};
+		9CC9C7C226C123250058D5F8 /* EditSubscriptionView */ = {
+			isa = PBXGroup;
+			children = (
+				9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */,
+			);
+			path = EditSubscriptionView;
 			sourceTree = "<group>";
 		};
 		9CE8578326B696F0001D7A3E /* Screens */ = {
@@ -356,6 +367,7 @@
 				9C46FC6426B8E7910085961E /* AlertItem.swift in Sources */,
 				9C6B26CA268FF74000E4D428 /* UpcomingSubscriptionsView.swift in Sources */,
 				9C6B26B9268FDD2400E4D428 /* SubTrackApp.swift in Sources */,
+				9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */,
 				9C5FC60126A6B7AA00C4673E /* Upcoming.swift in Sources */,
 				9C27CA6D26A114EF00FAFC64 /* TotalCard.swift in Sources */,
 				9C6B26CE26901F2E00E4D428 /* Subscription.swift in Sources */,

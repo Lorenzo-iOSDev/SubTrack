@@ -14,3 +14,20 @@ enum PaymentFrequency: String, CaseIterable, Codable {
     case BiAnnually = "Bi-Annual"
     case Annually = "Annual"
 }
+
+extension PaymentFrequency {
+    func convertToInt() -> Int {
+        switch self {
+        case .Weekly:
+            return 0
+        case .Monthly:
+            return 1
+        case .Quarterly:
+            return 2
+        case .BiAnnually:
+            return 3
+        case .Annually:
+            return 4
+        }
+    }
+}

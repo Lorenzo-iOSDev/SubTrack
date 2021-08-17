@@ -18,9 +18,11 @@ struct SubscriptionListCard: View {
                 SubscriptionListCardCell(subscription: service)
                     .contentShape(Rectangle()) // fixes onTapGesture not working with empty spaces.
                     .onTapGesture {
-                        print("tapped on \(service.serviceName)")
-                        viewModel.isShowingDetailView = true
+                        print("payment start date for \(service.serviceName) is \(service.subStartDate)")
+                        print("payment date for \(service.serviceName) is \(service.paymentDate)")
+                        
                         viewModel.selectedSubscription = service
+                        viewModel.isShowingDetailView = true
                     }
             }
             .onDelete(perform: { indexSet in

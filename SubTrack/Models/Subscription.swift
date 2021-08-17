@@ -7,15 +7,24 @@
 
 import Foundation
 
-final class Subscription: Identifiable, Codable{
+final class Subscription: Identifiable, Codable, Equatable{
+    
+    static func == (lhs: Subscription, rhs: Subscription) -> Bool {
+        if lhs.id == rhs.id {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
     var id = UUID()
     
-    let serviceName: String
-    let paymentFrequency: PaymentFrequency
-    let serviceSymbol: Symbols
-    let price: Double
-    let subStartDate: Date
+    var serviceName: String
+    var paymentFrequency: PaymentFrequency
+    var serviceSymbol: Symbols
+    var price: Double
+    var subStartDate: Date
     
     var paymentDate: Date
     

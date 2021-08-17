@@ -9,11 +9,9 @@ import SwiftUI
 
 struct SubscriptionDetailView: View {
     
+    @ObservedObject var viewModel: SubTrackViewModel
+    
     @Environment(\.colorScheme) var colorScheme
-    
-    @Binding var isShowingDetailView: Bool
-    
-    var selectedSubscription: Subscription
     
     var body: some View {
         ZStack {
@@ -21,8 +19,8 @@ struct SubscriptionDetailView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Icon(systemName: selectedSubscription.serviceSymbol.rawValue, sizeMultiplier: 2.0)
-                Text(selectedSubscription.serviceName)
+                Icon(systemName: viewModel.selectedSubscription!.serviceSymbol.rawValue, sizeMultiplier: 2.0)
+                Text(viewModel.selectedSubscription!.serviceName)
                     .font(.title)
                     .fontWeight(.medium)
                 
@@ -31,10 +29,13 @@ struct SubscriptionDetailView: View {
                         Text("Date Started")
                             .bold()
                             .padding(.vertical, 3)
-                        Text("\(selectedSubscription.paymentFrequency.rawValue) cost")
+                        Text("Next Payment")
                             .bold()
                             .padding(.vertical, 3)
-                        Text("Total cost so far")
+                        Text("\(viewModel.selectedSubscription!.paymentFrequency.rawValue) cost")
+                            .bold()
+                            .padding(.vertical, 3)
+                        Text("Total paid")
                             .bold()
                             .padding(.vertical, 3)
                     }
@@ -43,11 +44,13 @@ struct SubscriptionDetailView: View {
                     Spacer()
                     
                     VStack(alignment: .trailing) {
-                        Text("\(selectedSubscription.subStartDate.toString())")
+                        Text("\(viewModel.selectedSubscription!.subStartDate.toString())")
                             .padding(.vertical, 3)
-                        Text("$\(selectedSubscription.price, specifier: "%.2f")")
+                        Text("\(viewModel.selectedSubscription!.paymentDate.toString())")
+                            .padding(.vertical,3)
+                        Text("$\(viewModel.selectedSubscription!.price, specifier: "%.2f")")
                             .padding(.vertical, 3)
-                        Text("$\(selectedSubscription.price * 12, specifier: "%.2f")")
+                        Text("$\(viewModel.costSoFar(of: viewModel.selectedSubscription!), specifier: "%.2f")")
                             .padding(.vertical, 3)
                     }
                     .padding()
@@ -57,6 +60,7 @@ struct SubscriptionDetailView: View {
                 HStack {
                     Button {
                         print("Edit Button Pressed")
+                        viewModel.isShowingEditView = true
                     } label: {
                         Text("Edit")
                             .font(.title3)
@@ -72,12 +76,13 @@ struct SubscriptionDetailView: View {
                     
                     Button {
                         print("Delete Button Pressed")
+                        viewModel.deleteButtonPressed()
                     } label: {
                         Text("Delete")
                             .font(.title3)
                             .fontWeight(.medium)
                             .foregroundColor(Color("WhiteBlack"))
-                            .frame(width: 120,height: 45)
+                            .frame(width: 120, height: 45)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color("BlackWhite"), style: StrokeStyle(lineWidth: 3))
@@ -88,13 +93,16 @@ struct SubscriptionDetailView: View {
                     .padding(.horizontal)
                 }
             }
+            .sheet(isPresented: $viewModel.isShowingEditView) {
+                EditSubscriptionView(viewModel: viewModel)
+            }
         }
         .cornerRadius(8.0)
         .frame(width: 350, height: 450)
         .shadow(radius: 10)
         .overlay(
             Button {
-                isShowingDetailView = false
+                viewModel.isShowingDetailView = false
             } label: {
                 XDismissButton()
             }.padding(5)
@@ -105,10 +113,10 @@ struct SubscriptionDetailView: View {
 struct SubscriptionDetailView_Previews: PreviewProvider {
     static var previews: some View {
         
-        SubscriptionDetailView(isShowingDetailView: .constant(true), selectedSubscription: MockData.service1)
+        SubscriptionDetailView(viewModel: SubTrackViewModel())
             .preferredColorScheme(.light)
             
-        SubscriptionDetailView(isShowingDetailView: .constant(true), selectedSubscription: MockData.service1)
+        SubscriptionDetailView(viewModel: SubTrackViewModel())
             .preferredColorScheme(.dark)
     }
 }

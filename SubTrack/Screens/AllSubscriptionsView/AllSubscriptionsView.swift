@@ -46,7 +46,7 @@ struct AllSubscriptionsView: View {
             .blur(radius: viewModel.isShowingDetailView ? 20.0 : 0.0)
             
             if viewModel.isShowingDetailView {
-                SubscriptionDetailView(isShowingDetailView: $viewModel.isShowingDetailView, selectedSubscription: viewModel.selectedSubscription!)
+                SubscriptionDetailView(viewModel: viewModel)
             }
         }
         .onAppear() {

@@ -20,11 +20,21 @@ struct IconPickerView: View {
             VStack {
                 Spacer()
                 
-                SubscriptionCard(subscription: Subscription(serviceName: viewModel.subName,
-                                                            paymentFrequency: PaymentFrequency.allCases[viewModel.paymentFreqPicked],
-                                                            serviceSymbol: Symbols.allCases[viewModel.symbolPicked],
-                                                            price: Double(viewModel.subPrice) ?? 0.00,
-                                                            subStartDate: Date(), paymentDate: Date()))
+                if (!viewModel.isShowingEditView) {
+                    SubscriptionCard(subscription: Subscription(serviceName: viewModel.subName,
+                                                                paymentFrequency: PaymentFrequency.allCases[viewModel.paymentFreqPicked],
+                                                                serviceSymbol: Symbols.allCases[viewModel.symbolPicked],
+                                                                price: Double(viewModel.subPrice) ?? 0.00,
+                                                                subStartDate: Date(), paymentDate: Date()))
+                } else {
+                    SubscriptionCard(subscription: Subscription(serviceName: viewModel.newName,
+                                                                paymentFrequency: PaymentFrequency.allCases[viewModel.newPaymentFreq],
+                                                                serviceSymbol: Symbols.allCases[viewModel.newSymbol],
+                                                                price: Double(viewModel.newPrice) ?? 0.00,
+                                                                subStartDate: Date(), paymentDate: Date()))
+                }
+                
+                
                 
                 Spacer()
                     .frame(height: 100)
@@ -32,7 +42,11 @@ struct IconPickerView: View {
                 LazyVGrid(columns: viewModel.columns) {
                     ForEach(Symbols.allCases.indices) { symbol in
                         Button {
-                            viewModel.symbolPicked = symbol
+                            if (!viewModel.isShowingEditView) {
+                                viewModel.symbolPicked = symbol
+                            } else {
+                                viewModel.newSymbol = symbol
+                            }
                         } label: {
                             Icon(systemName: Symbols.allCases[symbol].rawValue)
                                 .padding()

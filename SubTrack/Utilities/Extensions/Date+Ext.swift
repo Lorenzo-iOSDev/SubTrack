@@ -8,6 +8,13 @@
 import Foundation
 
 extension Date {
+    var eighteenYearsAgo: Date {
+        Calendar.current.date(byAdding: .year, value: -18, to: Date())!
+    }
+    
+    var oneHundredYearsAgo: Date {
+        Calendar.current.date(byAdding: .year, value: -100, to: Date())!
+    }
     
     func toString() -> String {
         let dateFormatter = DateFormatter()
@@ -39,13 +46,5 @@ extension Date {
     
     func nextYear() -> Date {
         return Calendar.current.date(byAdding: .year, value: 1, to: self)!
-    }
-    
-    var eighteenYearsAgo: Date {
-        Calendar.current.date(byAdding: .year, value: -18, to: Date())!
-    }
-    
-    var oneHundredYearsAgo: Date {
-        Calendar.current.date(byAdding: .year, value: -100, to: Date())!
     }
 }
