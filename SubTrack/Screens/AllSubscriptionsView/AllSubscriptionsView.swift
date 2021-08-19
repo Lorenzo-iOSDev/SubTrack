@@ -42,11 +42,18 @@ struct AllSubscriptionsView: View {
             }
             .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
                     AddSubscriptionView(viewModel: viewModel)})
-            
-            .blur(radius: viewModel.isShowingDetailView ? 20.0 : 0.0)
+            .blur(radius: viewModel.isShowingDetailView || viewModel.isShowingTotalDetailView ? 20.0 : 0.0)
             
             if viewModel.isShowingDetailView {
                 SubscriptionDetailView(viewModel: viewModel)
+            }
+            
+            Text("").hidden().sheet(isPresented: $viewModel.isShowingEditView) {
+                EditSubscriptionView(viewModel: viewModel)
+            }
+            
+            if viewModel.isShowingTotalDetailView {
+                TotalCostDetailView(viewModel: viewModel)
             }
         }
         .onAppear() {

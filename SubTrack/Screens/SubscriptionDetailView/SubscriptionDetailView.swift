@@ -61,6 +61,7 @@ struct SubscriptionDetailView: View {
                     Button {
                         print("Edit Button Pressed")
                         viewModel.isShowingEditView = true
+                        print(viewModel.isShowingEditView)
                     } label: {
                         Text("Edit")
                             .font(.title3)
@@ -93,9 +94,9 @@ struct SubscriptionDetailView: View {
                     .padding(.horizontal)
                 }
             }
-            .sheet(isPresented: $viewModel.isShowingEditView) {
-                EditSubscriptionView(viewModel: viewModel)
-            }
+//            .sheet(isPresented: $viewModel.isShowingEditView) {
+//                EditSubscriptionView(viewModel: viewModel)
+//            }
         }
         .cornerRadius(8.0)
         .frame(width: 350, height: 450)

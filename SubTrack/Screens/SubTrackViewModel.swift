@@ -26,6 +26,7 @@ final class SubTrackViewModel: ObservableObject {
     @Published var isShowingAddSubscription = false
     @Published var isShowingDetailView = false
     @Published var isShowingEditView = false
+    @Published var isShowingTotalDetailView = false
     
     //AddSubscriptionView & IconPickerView
     @Published var subName = ""

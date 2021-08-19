@@ -33,7 +33,6 @@ struct EditSubscriptionView: View {
                     Section {
                         Button {
                             viewModel.saveEdit()
-                            //viewModel.retrieveSubscriptions()
                             viewModel.isShowingEditView = false
                         } label: {
                             Text("Save Subscription")

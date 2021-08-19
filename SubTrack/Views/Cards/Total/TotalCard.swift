@@ -14,7 +14,7 @@ struct TotalCard: View {
     
     var body: some View {
         Button {
-            //action
+            viewModel.isShowingTotalDetailView = true
         } label: {
             HStack{
                 Text("Total Cost per Month")

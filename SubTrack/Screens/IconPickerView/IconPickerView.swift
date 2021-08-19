@@ -20,7 +20,7 @@ struct IconPickerView: View {
             VStack {
                 Spacer()
                 
-                if (!viewModel.isShowingEditView) {
+                if (viewModel.isShowingEditView == false) {
                     SubscriptionCard(subscription: Subscription(serviceName: viewModel.subName,
                                                                 paymentFrequency: PaymentFrequency.allCases[viewModel.paymentFreqPicked],
                                                                 serviceSymbol: Symbols.allCases[viewModel.symbolPicked],
@@ -42,7 +42,7 @@ struct IconPickerView: View {
                 LazyVGrid(columns: viewModel.columns) {
                     ForEach(Symbols.allCases.indices) { symbol in
                         Button {
-                            if (!viewModel.isShowingEditView) {
+                            if (viewModel.isShowingEditView == false) {
                                 viewModel.symbolPicked = symbol
                             } else {
                                 viewModel.newSymbol = symbol
