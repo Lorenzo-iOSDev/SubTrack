@@ -36,8 +36,10 @@ struct AllSubscriptionsView: View {
                 
                 VStack {
                     SubscriptionListCard(viewModel: viewModel)
+                        .disabled(viewModel.isShowingDetailView || viewModel.isShowingTotalDetailView)
                     
                     TotalCard(viewModel: viewModel)
+                        .disabled(viewModel.isShowingDetailView || viewModel.isShowingTotalDetailView)
                 }
             }
             .sheet(isPresented: $viewModel.isShowingAddSubscription, content: {
@@ -52,6 +54,10 @@ struct AllSubscriptionsView: View {
                 EditSubscriptionView(viewModel: viewModel)
             }
             
+            if viewModel.subscriptions.count == 0 && viewModel.isShowingTotalDetailView == false {
+                AllSubsEmptyState()
+            }
+            
             if viewModel.isShowingTotalDetailView {
                 TotalCostDetailView(viewModel: viewModel)
             }
@@ -59,13 +65,11 @@ struct AllSubscriptionsView: View {
         .onAppear() {
             viewModel.retrieveSubscriptions()
         }
-        .overlay(AllSubsEmptyState(viewModel: viewModel))
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(title: alertItem.title,
                   message: alertItem.message,
                   dismissButton: alertItem.dismissButton)
         }
-        .navigationTitle("All Subscriptions")
     }
 }
 
@@ -75,21 +79,5 @@ struct ContentView_Previews: PreviewProvider {
             
         AllSubscriptionsView(viewModel: SubTrackViewModel())
             .preferredColorScheme(.dark)
-    }
-}
-
-struct AllSubsEmptyState: View {
-    
-    @ObservedObject var viewModel : SubTrackViewModel
-    
-    var body: some View {
-        if viewModel.subscriptions.count == 0 {
-                VStack {
-                    Text("Press + to add a \n new subscription")
-                        .multilineTextAlignment(.center)
-                        .font(.title)
-                        .padding()
-                }
-        }
     }
 }

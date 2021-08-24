@@ -54,16 +54,119 @@ final class SubTrackViewModel: ObservableObject {
     //AlertItem
     @Published var alertItem: AlertItem?
     
-    var currentDate = Date()
-    
-    var totalPrice: Double {
+    var costThisMonth: Double {
+        let calendar = Calendar.autoupdatingCurrent
+        let currentDate = Date()
+        
         var total = 0.00
+        
         for sub in subscriptions {
-            total += sub.price
+            let currentDateComponent = calendar.dateComponents([Calendar.Component.month], from: currentDate)
+            let subscriptionDateComponent = calendar.dateComponents([Calendar.Component.month], from: sub.paymentDate)
+            
+            if subscriptionDateComponent.month == currentDateComponent.month {
+                switch sub.paymentFrequency {
+                case .Weekly:
+                    total += sub.price * 4
+                case .Monthly:
+                    total += sub.price
+                case .Quarterly:
+                    total += sub.price / 4
+                case .BiAnnually:
+                    total += sub.price / 6
+                case .Annually:
+                    total += sub.price / 12
+                }
+            }
         }
         
         return total
     }
+    
+    var costPerDay: Double {
+        var total = 0.00
+        
+        for sub in subscriptions {
+            switch sub.paymentFrequency {
+            case .Weekly:
+                total += sub.price * 52.17857
+            case .Monthly:
+                total += sub.price * 12
+            case .Quarterly:
+                total += sub.price * 4
+            case .BiAnnually:
+                total += sub.price * 2
+            case .Annually:
+                total += sub.price
+            }
+        }
+        
+        return total / 365
+    }
+    
+    var costPerMonth: Double{
+        var total = 0.00
+        
+        for sub in subscriptions {
+            switch sub.paymentFrequency {
+            case .Weekly:
+                total += sub.price * 52.17857
+            case .Monthly:
+                total += sub.price * 12
+            case .Quarterly:
+                total += sub.price * 4
+            case .BiAnnually:
+                total += sub.price * 2
+            case .Annually:
+                total += sub.price
+            }
+        }
+        
+        return total / 12
+    }
+    
+    var costPerYear: Double{
+        var total = 0.00
+        
+        for sub in subscriptions {
+            switch sub.paymentFrequency {
+            case .Weekly:
+                total += sub.price * 52.17857
+            case .Monthly:
+                total += sub.price * 12
+            case .Quarterly:
+                total += sub.price * 4
+            case .BiAnnually:
+                total += sub.price * 2
+            case .Annually:
+                total += sub.price
+            }
+        }
+        
+        return total
+    }
+    
+    var costPerHalfYear: Double{
+        var total = 0.00
+        
+        for sub in subscriptions {
+            switch sub.paymentFrequency {
+            case .Weekly:
+                total += sub.price * 52.17857
+            case .Monthly:
+                total += sub.price * 12
+            case .Quarterly:
+                total += sub.price * 4
+            case .BiAnnually:
+                total += sub.price * 2
+            case .Annually:
+                total += sub.price
+            }
+        }
+        
+        return total / 2
+    }
+    
     
     func filterSubscriptions() {
         today = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.Today}

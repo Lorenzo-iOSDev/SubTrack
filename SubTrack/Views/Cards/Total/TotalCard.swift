@@ -17,13 +17,13 @@ struct TotalCard: View {
             viewModel.isShowingTotalDetailView = true
         } label: {
             HStack{
-                Text("Total Cost per Month")
+                Text("Due this Month")
                     .font(.title2)
                     .fontWeight(.medium)
                 
                 Spacer()
                 
-                Text("$\(viewModel.totalPrice, specifier: "%.2f")")
+                Text("$\(viewModel.costThisMonth, specifier: "%.2f")")
                     .font(.title3)
             }
             .padding()

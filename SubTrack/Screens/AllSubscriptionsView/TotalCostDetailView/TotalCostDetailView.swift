@@ -23,15 +23,15 @@ struct TotalCostDetailView: View {
                     Text("Cost per Day")
                         .bold()
                         .multilineTextAlignment(.center)
-                    Text("$1.99")
+                    Text("$\(viewModel.costPerDay, specifier: "%.2f")")
                         .padding(5)
                 }.padding()
                 
                 VStack {
-                    Text("Cost per Month")
+                    Text("Cost per Half Year")
                         .bold()
                         .multilineTextAlignment(.center)
-                    Text("$13.93")
+                    Text("$\(viewModel.costPerHalfYear, specifier: "%.2f")")
                         .padding(5)
                 }.padding()
                 
@@ -39,7 +39,7 @@ struct TotalCostDetailView: View {
                     Text("Cost per Year")
                         .bold()
                         .multilineTextAlignment(.center)
-                    Text("$726.35")
+                    Text("$\(viewModel.costPerYear, specifier: "%.2f")")
                         .padding(5)
                 }.padding()
             }

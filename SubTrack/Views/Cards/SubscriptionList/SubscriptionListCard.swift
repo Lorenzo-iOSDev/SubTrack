@@ -30,7 +30,6 @@ struct SubscriptionListCard: View {
             })
             .listRowBackground(Color(colorScheme == .dark ? .secondarySystemBackground : .systemBackground))
         }
-        .disabled(viewModel.isShowingDetailView)
         .onAppear {
             UITableView.appearance().backgroundColor = .clear
         }
