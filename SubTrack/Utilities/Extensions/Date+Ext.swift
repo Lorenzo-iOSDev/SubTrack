@@ -28,6 +28,10 @@ extension Date {
         calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
     }
     
+    func dayBefore() -> Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+    }
+    
     func nextWeek() -> Date {
         return Calendar.current.date(byAdding: .day, value: 7, to: self)!
     }

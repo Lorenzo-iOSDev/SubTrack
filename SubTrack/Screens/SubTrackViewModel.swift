@@ -54,6 +54,9 @@ final class SubTrackViewModel: ObservableObject {
     //AlertItem
     @Published var alertItem: AlertItem?
     
+    //NotificationManager
+    @ObservedObject var notificationManager = LocalNotificationManager()
+    
     var costThisMonth: Double {
         let calendar = Calendar.autoupdatingCurrent
         let currentDate = Date()
@@ -215,6 +218,9 @@ final class SubTrackViewModel: ObservableObject {
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
         filterSubscriptions()
         
+        let date = Date()
+        notificationManager.sendNotification(title: newSub.serviceName, subtitle: nil, body: "Payment for \(newSub.serviceName) is due", sendIn: newSub.paymentDate.timeIntervalSince(date))
+        
         saveSubscriptions()
         resetFormFields()
     }
@@ -272,12 +278,6 @@ final class SubTrackViewModel: ObservableObject {
         sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
         filterSubscriptions()
-        
-        //Debugging
-//        print(Date().startOfWeek())
-//        subscriptions.map { printSubscriptionUpcomingClassifiers($0) }
-//        subscriptions.map { printPaymentDates($0) }
-//        print("\n \n sortedSubscription size: \(sortedSubscriptions.count)")
     }
     
     func checkForPaymentDates() {
@@ -287,6 +287,9 @@ final class SubTrackViewModel: ObservableObject {
             for update in dueUpdates {
                 update.updatePayment()
                 saveSubscriptions()
+                
+                let date = Date()
+                notificationManager.sendNotification(title: update.serviceName, subtitle: nil, body: "Payment for \(update.serviceName) is due today", sendIn: update.paymentDate.timeIntervalSince(date))
             }
         }
     }
@@ -401,6 +404,9 @@ final class SubTrackViewModel: ObservableObject {
         subscriptions.remove(at: originalIndex + 1)
         
         checkForPaymentDates()
+        
+        let date = Date()
+        notificationManager.sendNotification(title: replacementSub.serviceName, subtitle: nil, body: "Payment for \(replacementSub.serviceName) is due today", sendIn: replacementSub.paymentDate.timeIntervalSince(date))
         
         sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })

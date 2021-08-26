@@ -34,6 +34,7 @@
 		9CA45FA02693AF22008344A4 /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45F9F2693AF22008344A4 /* XDismissButton.swift */; };
 		9CA45FA2269402F3008344A4 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45FA1269402F3008344A4 /* Date+Ext.swift */; };
 		9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */; };
+		9CD1F02926D6433A00C0AE0E /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		9CA45F9F2693AF22008344A4 /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
 		9CA45FA1269402F3008344A4 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSubscriptionView.swift; sourceTree = "<group>"; };
+		9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				9C5FC60026A6B7AA00C4673E /* Upcoming.swift */,
 				9C5FC60226A6B7C400C4673E /* Symbols.swift */,
 				9C5FC60426A6B7D700C4673E /* PaymentFrequency.swift */,
+				9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				9C6B26CC268FF76000E4D428 /* SubTrackTabView.swift in Sources */,
 				9C46FC6426B8E7910085961E /* AlertItem.swift in Sources */,
 				9C6B26CA268FF74000E4D428 /* UpcomingSubscriptionsView.swift in Sources */,
+				9CD1F02926D6433A00C0AE0E /* LocalNotificationManager.swift in Sources */,
 				9C70027E26D51A5A00515425 /* AllSubsEmptyState.swift in Sources */,
 				9C6B26B9268FDD2400E4D428 /* SubTrackApp.swift in Sources */,
 				9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */,
