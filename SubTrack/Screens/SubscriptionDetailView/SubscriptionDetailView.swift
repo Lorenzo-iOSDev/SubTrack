@@ -94,16 +94,15 @@ struct SubscriptionDetailView: View {
                     .padding(.horizontal)
                 }
             }
-//            .sheet(isPresented: $viewModel.isShowingEditView) {
-//                EditSubscriptionView(viewModel: viewModel)
-//            }
         }
         .cornerRadius(8.0)
         .frame(width: 350, height: 450)
         .shadow(radius: 10)
         .overlay(
             Button {
-                viewModel.isShowingDetailView = false
+                withAnimation {
+                    viewModel.isShowingDetailView = false
+                }
             } label: {
                 XDismissButton()
             }.padding(5)

@@ -48,6 +48,7 @@ struct AllSubscriptionsView: View {
             
             if viewModel.isShowingDetailView {
                 SubscriptionDetailView(viewModel: viewModel)
+                    .transition(.opacity)
             }
             
             Text("").hidden().sheet(isPresented: $viewModel.isShowingEditView) {
@@ -60,6 +61,7 @@ struct AllSubscriptionsView: View {
             
             if viewModel.isShowingTotalDetailView {
                 TotalCostDetailView(viewModel: viewModel)
+                    .transition(.opacity)
             }
         }
         .onAppear() {

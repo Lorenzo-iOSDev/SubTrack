@@ -22,7 +22,10 @@ struct SubscriptionListCard: View {
                         print("payment date for \(service.serviceName) is \(service.paymentDate)")
                         
                         viewModel.selectedSubscription = service
-                        viewModel.isShowingDetailView = true
+                        
+                        withAnimation {
+                            viewModel.isShowingDetailView = true
+                        }
                     }
             }
             .onDelete(perform: { indexSet in

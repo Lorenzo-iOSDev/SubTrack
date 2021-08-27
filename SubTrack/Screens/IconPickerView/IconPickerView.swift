@@ -71,6 +71,7 @@ struct IconPickerView_Previews: PreviewProvider {
     }
 }
 
+//ReFactor
 struct Icon: View {
     
     var systemName: String

@@ -14,7 +14,9 @@ struct TotalCard: View {
     
     var body: some View {
         Button {
-            viewModel.isShowingTotalDetailView = true
+            withAnimation {
+                viewModel.isShowingTotalDetailView = true
+            }
         } label: {
             HStack{
                 Text("Due this Month")

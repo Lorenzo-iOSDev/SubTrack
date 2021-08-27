@@ -49,7 +49,9 @@ struct TotalCostDetailView: View {
         .shadow(radius: 10)
         .overlay(
             Button {
-                viewModel.isShowingTotalDetailView = false
+                withAnimation {
+                    viewModel.isShowingTotalDetailView = false
+                }
             } label: {
                 XDismissButton()
             }.padding(5), alignment: .topTrailing)
