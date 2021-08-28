@@ -9,25 +9,18 @@ import Foundation
 
 final class Subscription: Identifiable, Codable, Equatable{
     
-    static func == (lhs: Subscription, rhs: Subscription) -> Bool {
-        if lhs.id == rhs.id {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    
+    //Universally Unique Identifier for the subscription
     var id = UUID()
     
+    //Property variables for the subscription
     var serviceName: String
     var paymentFrequency: PaymentFrequency
     var serviceSymbol: Symbols
     var price: Double
     var subStartDate: Date
-    
     var paymentDate: Date
     
+    //Computed variable to automatically find out whether the subscriptions payment is due
     var paymentIsDue: Bool {
         let calendar = Calendar.autoupdatingCurrent
         
@@ -41,25 +34,27 @@ final class Subscription: Identifiable, Codable, Equatable{
         return false
     }
     
+    //Computed variable to classify wether the Subscription is due Today, Tomorrow, This Week or This Month
+    //Does this by comparing difference in Date Components of Days Weeks and Months
     var upcomingClassifier: Upcoming? {
         let calendar = Calendar.autoupdatingCurrent
         let currentDate = Date()
         
         let paymentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.weekOfMonth ,Calendar.Component.month, Calendar.Component.year], from: paymentDate)
         let currentDateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.weekOfMonth ,Calendar.Component.month, Calendar.Component.year], from: currentDate)
-        
-        guard let dateCompsDay = paymentDateComponents.day else { return nil } //return error alert
-        guard let currentDateCompsDay = currentDateComponents.day else { return nil } //return error alert
+
+        guard let dateCompsDay = paymentDateComponents.day else { return nil } //silently fail
+        guard let currentDateCompsDay = currentDateComponents.day else { return nil } //silently fail
         
         let differenceInDays = dateCompsDay - currentDateCompsDay
         
-        guard let dateCompsMonth = paymentDateComponents.month else { return nil } //return error alert
-        guard let currentDateCompsMonth = currentDateComponents.month else { return nil } //return error alert
+        guard let dateCompsMonth = paymentDateComponents.month else { return nil } //silently fail
+        guard let currentDateCompsMonth = currentDateComponents.month else { return nil } //silently fail
         
         let differenceInMonths = dateCompsMonth - currentDateCompsMonth
         
-        guard let dateCompsWeekOfMonth = paymentDateComponents.weekOfMonth else { return nil }
-        guard let currentDateCompsWeekOfMonth = currentDateComponents.weekOfMonth else { return nil }
+        guard let dateCompsWeekOfMonth = paymentDateComponents.weekOfMonth else { return nil } //silently fail
+        guard let currentDateCompsWeekOfMonth = currentDateComponents.weekOfMonth else { return nil } //silently fail
         
         if differenceInDays == 0 && differenceInMonths == 0 {
             return Upcoming.Today
@@ -74,6 +69,7 @@ final class Subscription: Identifiable, Codable, Equatable{
         return nil
     }
     
+    //Computed property of sorting priority so that sortedSubscriptions array can sort based on something
     var sortPriority: Int {
         switch upcomingClassifier {
         case .Today:
@@ -89,6 +85,7 @@ final class Subscription: Identifiable, Codable, Equatable{
         }
     }
     
+    //Initializer
     init(serviceName: String, paymentFrequency: PaymentFrequency, serviceSymbol: Symbols, price: Double, subStartDate: Date, paymentDate: Date) {
         self.serviceName = serviceName
         self.paymentFrequency = paymentFrequency
@@ -98,8 +95,18 @@ final class Subscription: Identifiable, Codable, Equatable{
         self.paymentDate = paymentDate
     }
     
+    // == Overload so that subscriptions can be equatable
+    //will check if subscriptions UUIDs are the same
+    static func == (lhs: Subscription, rhs: Subscription) -> Bool {
+        if lhs.id == rhs.id {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    //Functions to update the payment date based on payment frequency
     func updatePayment() {
-        
         while paymentIsDue {
             switch paymentFrequency {
             case .Weekly:
@@ -115,33 +122,11 @@ final class Subscription: Identifiable, Codable, Equatable{
             }
         }
     }
+    
 }
 
+//MockData sample data to use in previews
 struct MockData {
-//    static let service1 = Subscription(serviceName: "Apple TV+",
-//                                       paymentFrequency: PaymentFrequency.Monthly,
-//                                       serviceSymbol: Symbols.TV,
-//                                       price: 14.99,
-//                                       subStartDate: "19/07/2020")
-//
-//    static let service2 = Subscription(serviceName: "Netflix",
-//                                       paymentFrequency: PaymentFrequency.Monthly,
-//                                       serviceSymbol: Symbols.TV,
-//                                       price: 19.99,
-//                                       subStartDate: "19/07/2019")
-//
-//    static let service3 = Subscription(serviceName: "Spotify",
-//                                       paymentFrequency: PaymentFrequency.Monthly,
-//                                       serviceSymbol: Symbols.Music,
-//                                       price: 10.99, subStartDate: "20/07/2018")
-//
-//    static let service4 = Subscription(serviceName: "Minecraft Server",
-//                                       paymentFrequency: PaymentFrequency.Quarterly,
-//                                       serviceSymbol: Symbols.Server,
-//                                       price: 4.99, subStartDate: "23/07/2015")
-//
-//    static let services = [service1, service2, service3, service4]
-    
     static let service1 = Subscription(serviceName: "Apple TV+",
                                        paymentFrequency: PaymentFrequency.Monthly,
                                        serviceSymbol: Symbols.TV,

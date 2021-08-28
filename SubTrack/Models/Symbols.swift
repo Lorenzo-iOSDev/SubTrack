@@ -22,6 +22,7 @@ enum Symbols: String, CaseIterable, Codable{
     case Network = "network"
 }
 
+//Extension to return integer for each symbol enum
 extension Symbols {
     func convertToInt() -> Int {
         switch self {

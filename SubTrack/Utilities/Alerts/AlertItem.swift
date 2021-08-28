@@ -37,6 +37,14 @@ struct AlertContext {
                                             dismissButton: .default(Text("OK")))
     
     static let unableToSave = AlertItem(title: Text("Could not save data"),
-                                            message: Text("Unable to save data. Please contact developer."),
-                                            dismissButton: .default(Text("OK")))
+                                        message: Text("Unable to save data. Please contact developer."),
+                                        dismissButton: .default(Text("OK")))
+    
+    static let unableToReadSelectedSub = AlertItem(title: Text("Could not read data"),
+                                                   message: Text("Unable to read selected subscription data. Please contact developer."),
+                                                   dismissButton: .default(Text("OK")))
+    
+    static let unableToFindMatch = AlertItem(title: Text("Unable to replace data"),
+                                             message: Text("Unable to find matching subscription to edit. Please contact developer"),
+                                             dismissButton: .default(Text("OK")))
 }

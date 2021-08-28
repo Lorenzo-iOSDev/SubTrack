@@ -26,7 +26,7 @@ struct AllSubscriptionsView: View {
                     Spacer()
                     
                     Button {
-                        viewModel.showAddSubscriptionsView()
+                        viewModel.isShowingAddSubscription = true
                     } label: {
                         AddButton()
                     }

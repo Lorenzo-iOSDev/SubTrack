@@ -10,8 +10,6 @@ import UserNotifications
 
 class LocalNotificationManager: ObservableObject {
     
-    var notifications = [Notification]()
-    
     init() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if granted == true && error == nil {
@@ -22,6 +20,7 @@ class LocalNotificationManager: ObservableObject {
         }
     }
     
+    //Function to add notification to UNNotificationCenter
     func sendNotification(title: String, subtitle: String?, body: String, sendIn: Double) {
         let content = UNMutableNotificationContent()
         content.title = title
@@ -36,7 +35,7 @@ class LocalNotificationManager: ObservableObject {
         var trigger: UNTimeIntervalNotificationTrigger
         
         if sendIn <= 0 {
-            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
         } else {
             trigger = UNTimeIntervalNotificationTrigger(timeInterval: sendIn, repeats: false)
         }

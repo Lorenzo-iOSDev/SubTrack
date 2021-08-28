@@ -19,7 +19,7 @@ struct TotalCard: View {
             }
         } label: {
             HStack{
-                Text("Due this Month")
+                Text("Left this Month")
                     .font(.title2)
                     .fontWeight(.medium)
                 

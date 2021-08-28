@@ -10,7 +10,6 @@ import SwiftUI
 struct SubscriptionDetailView: View {
     
     @ObservedObject var viewModel: SubTrackViewModel
-    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {

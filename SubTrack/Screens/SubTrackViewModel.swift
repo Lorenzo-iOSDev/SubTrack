@@ -57,6 +57,8 @@ final class SubTrackViewModel: ObservableObject {
     //NotificationManager
     @ObservedObject var notificationManager = LocalNotificationManager()
     
+    //Computed property used in TotalCard
+    //To show how much is left to pay within the month
     var costThisMonth: Double {
         let calendar = Calendar.autoupdatingCurrent
         let currentDate = Date()
@@ -86,6 +88,8 @@ final class SubTrackViewModel: ObservableObject {
         return total
     }
     
+    //Computed property used in TotalCostDetailView
+    //Calculates the average cost per day over a year
     var costPerDay: Double {
         var total = 0.00
         
@@ -107,27 +111,8 @@ final class SubTrackViewModel: ObservableObject {
         return total / 365
     }
     
-    var costPerMonth: Double{
-        var total = 0.00
-        
-        for sub in subscriptions {
-            switch sub.paymentFrequency {
-            case .Weekly:
-                total += sub.price * 52.17857
-            case .Monthly:
-                total += sub.price * 12
-            case .Quarterly:
-                total += sub.price * 4
-            case .BiAnnually:
-                total += sub.price * 2
-            case .Annually:
-                total += sub.price
-            }
-        }
-        
-        return total / 12
-    }
-    
+    //Computed property used in TotalCostDetailView
+    //Calculates the average cost per day over a year
     var costPerYear: Double{
         var total = 0.00
         
@@ -149,6 +134,8 @@ final class SubTrackViewModel: ObservableObject {
         return total
     }
     
+    //Computed property used in TotalCostDetailView
+    //Calculates the average cost per day over a year
     var costPerHalfYear: Double{
         var total = 0.00
         
@@ -170,7 +157,8 @@ final class SubTrackViewModel: ObservableObject {
         return total / 2
     }
     
-    
+    //Function used in UpcomingSubscriptionsView
+    //Filters subscriptions into an arrays that classify them as either due Today, Tomorrow, This Week or This Month
     func filterSubscriptions() {
         today = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.Today}
         tomorrow = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.Tomorrow}
@@ -178,6 +166,10 @@ final class SubTrackViewModel: ObservableObject {
         thisMonth = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.ThisMonth}
     }
     
+    //Function used in AddSubscriptionView modal
+    //Takes data from the form and creates a new subscription item and adds it into subscription array
+    //Also re-does sortedSubscription array and filters subscriptions into classified arrays as well.
+    //Also adds notification call
     func addSubscription() {
         guard let priceDouble = Double(subPrice) else {
             alertItem = AlertContext.invalidDouble
@@ -189,19 +181,19 @@ final class SubTrackViewModel: ObservableObject {
         switch paymentFreqPicked {
         case 0:
             paymentDate = subDate.nextWeek()
-            
+
         case 1:
             paymentDate = subDate.nextMonth()
-        
+
         case 2:
             paymentDate = subDate.nextQuarter()
-            
+
         case 3:
             paymentDate = subDate.nextHalfYear()
-            
+
         case 4 :
             paymentDate = subDate.nextYear()
-            
+
         default:
             paymentDate = subDate.nextMonth()
         }
@@ -213,18 +205,26 @@ final class SubTrackViewModel: ObservableObject {
                                   subStartDate: subDate,
                                   paymentDate: paymentDate)
         
+        newSub.updatePayment()
+        
         subscriptions.append(newSub)
         sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
         filterSubscriptions()
         
         let date = Date()
-        notificationManager.sendNotification(title: newSub.serviceName, subtitle: nil, body: "Payment for \(newSub.serviceName) is due", sendIn: newSub.paymentDate.timeIntervalSince(date))
+        print("\n\n \(newSub.paymentDate)")
+        notificationManager.sendNotification(title: newSub.serviceName, subtitle: nil,
+                                             body: "Payment for \(newSub.serviceName) is due",
+                                             sendIn: newSub.paymentDate.timeIntervalSince(date))
         
         saveSubscriptions()
         resetFormFields()
+        
+        isShowingAddSubscription = false
     }
     
+    //Resets all variables used for AddSubscriptionView and Edit SubscriptionView
     func resetFormFields() {
         subName = ""
         subPrice = ""
@@ -239,10 +239,7 @@ final class SubTrackViewModel: ObservableObject {
         newSymbol = 0
     }
     
-    func showAddSubscriptionsView() {
-        isShowingAddSubscription = true
-    }
-    
+    //Deletes subscription at a certain index, used for swipe to delete in AllSubscriptionsView
     func deleteSubscription(at offsets: IndexSet) {
         subscriptions.remove(atOffsets: offsets)
         
@@ -250,6 +247,7 @@ final class SubTrackViewModel: ObservableObject {
         retrieveSubscriptions()
     }
     
+    //Saves subscriptions by encoding subscriptions into subscriptionData JSON
     func saveSubscriptions() {
         do {
             let data = try JSONEncoder().encode(subscriptions)
@@ -260,8 +258,10 @@ final class SubTrackViewModel: ObservableObject {
         }
     }
     
+    //Loads and decodes saved data JSON back into subscription array
+    //Also checks for payment dates, sorts and filters subscriptions
+    //Used to refresh views
     func retrieveSubscriptions() {
-        
         guard let subscriptionsData = subscriptionsData else { return } // fail silently as if it is Nil then there was no saved data in the first place
         
         do {
@@ -272,7 +272,6 @@ final class SubTrackViewModel: ObservableObject {
             print(error.localizedDescription)
         }
         
-        //check for paymentUpdates
         checkForPaymentDates()
         
         sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
@@ -280,7 +279,10 @@ final class SubTrackViewModel: ObservableObject {
         filterSubscriptions()
     }
     
+    //Function to check if any payments are due and to update the payment date using Subscription Models updatePayment() function
+    //Also adds a new notification call for next payment due date
     func checkForPaymentDates() {
+        let date = Date()
         let dueUpdates = subscriptions.filter { $0.paymentIsDue } // this works because since Subscription is a class and not a Struct, it is referenced instead of copied.
         
         if !dueUpdates.isEmpty {
@@ -288,15 +290,19 @@ final class SubTrackViewModel: ObservableObject {
                 update.updatePayment()
                 saveSubscriptions()
                 
-                let date = Date()
-                notificationManager.sendNotification(title: update.serviceName, subtitle: nil, body: "Payment for \(update.serviceName) is due today", sendIn: update.paymentDate.timeIntervalSince(date))
+                notificationManager.sendNotification(title: update.serviceName,
+                                                     subtitle: nil, body: "Payment for \(update.serviceName) is due today",
+                                                     sendIn: update.paymentDate.timeIntervalSince(date))
             }
         }
     }
     
+    //Function to find out the cost of a subscription so far, meaning from the time the user has signed up to said subscription
+    //Does this by switching based on Payment Frequency of subscription and comparing the subscriptions start date to the next payment date
     func costSoFar(of subscription: Subscription) -> Double {
         
         switch subscription.paymentFrequency {
+        
         case .Weekly:
             var diffInWeeks = Calendar.current.dateComponents([.weekOfYear], from: subscription.subStartDate, to: subscription.paymentDate)
             if diffInWeeks.weekOfYear == 0 { diffInWeeks.weekOfYear = 1 }
@@ -316,7 +322,7 @@ final class SubTrackViewModel: ObservableObject {
                 amountOfQuarters = Double(diffInQuarter.month!) / 4.0
                 return subscription.price * amountOfQuarters
             } else {
-                return subscription.price * 1
+                return subscription.price
             }
             
         case .BiAnnually:
@@ -328,7 +334,7 @@ final class SubTrackViewModel: ObservableObject {
                 amountOfHalfYears = Double(diffInBiAnnualInMonths.month!) / 6.0
                 return subscription.price * amountOfHalfYears
             } else {
-                return subscription.price * 1
+                return subscription.price
             }
             
         case .Annually:
@@ -338,32 +344,38 @@ final class SubTrackViewModel: ObservableObject {
         }
     }
     
+    //Function to fill EditSubscriptionView info with selected subscriptions information
     func fillEditInfo() {
         
         guard let selectedSub = selectedSubscription else {
             print("error unwrapping selected subscription in fillSubInfo()")
+            alertItem = AlertContext.unableToReadSelectedSub
             return
-        } //alertItem?
+        }
         
         newName = selectedSub.serviceName
         newPrice = "\(selectedSub.price)"
         newDate = selectedSub.subStartDate
         
-        print("\n \n \(selectedSub.subStartDate) vs \(newDate)")
-        
         newPaymentFreq = selectedSub.paymentFrequency.convertToInt()
         newSymbol = selectedSub.serviceSymbol.convertToInt()
     }
     
+    //Function to save edited subscription
+    //Does this by taking new data and creating a new subscription object, finding the selected subscriptions index
+    //then inserting the new subscription into the place of the old one then deleting the index of original+1
+    //Also adds notification call
     func saveEdit() {
         
         guard let selectedSubscription = selectedSubscription else {
             print("error unwrapping selected subscription in saveEdit()")
+            alertItem = AlertContext.unableToReadSelectedSub
             return
-        } // alertItem?
+        }
         
         guard let originalIndex = subscriptions.firstIndex(where: { $0 == selectedSubscription }) else {
             print("Could not find matching subscription")
+            alertItem = AlertContext.unableToFindMatch
             return
         }
         
@@ -403,10 +415,12 @@ final class SubTrackViewModel: ObservableObject {
         subscriptions.insert(replacementSub, at: originalIndex)
         subscriptions.remove(at: originalIndex + 1)
         
-        checkForPaymentDates()
+        replacementSub.updatePayment()
         
         let date = Date()
-        notificationManager.sendNotification(title: replacementSub.serviceName, subtitle: nil, body: "Payment for \(replacementSub.serviceName) is due today", sendIn: replacementSub.paymentDate.timeIntervalSince(date))
+        notificationManager.sendNotification(title: replacementSub.serviceName,
+                                             subtitle: nil, body: "Payment for \(replacementSub.serviceName) is due today",
+                                             sendIn: replacementSub.paymentDate.timeIntervalSince(date))
         
         sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
         sortedSubscriptions.sort(by: { $0.sortPriority < $1.sortPriority })
@@ -418,6 +432,9 @@ final class SubTrackViewModel: ObservableObject {
         isShowingDetailView = false
     }
     
+    //Function used in SubscriptionDetailView to Delete chosen subscription
+    //Works by finding the index of the selected subscription and deleted that index
+    //Then refreshing arrays by saving and retrieving
     func deleteButtonPressed() {
         
         guard let index = subscriptions.firstIndex(where: { $0 == selectedSubscription }) else {
@@ -433,6 +450,7 @@ final class SubTrackViewModel: ObservableObject {
     }
     
     //Debugging functions
+    //Functions used when debugging
     func printPaymentDates(_ subscription: Subscription) {
         print("payment date for \(subscription.serviceName) is \(subscription.paymentDate)")
     }

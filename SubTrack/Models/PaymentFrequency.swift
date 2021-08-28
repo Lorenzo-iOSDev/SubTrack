@@ -15,6 +15,7 @@ enum PaymentFrequency: String, CaseIterable, Codable {
     case Annually = "Annual"
 }
 
+//Extension to return integer based on payment frequency enum
 extension PaymentFrequency {
     func convertToInt() -> Int {
         switch self {

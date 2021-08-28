@@ -34,7 +34,6 @@ struct AddSubscriptionView: View {
                         Button {
                             viewModel.addSubscription()
                             viewModel.retrieveSubscriptions()
-                            viewModel.isShowingAddSubscription.toggle()
                         } label: {
                             Text("Add New Subscription")
                         }

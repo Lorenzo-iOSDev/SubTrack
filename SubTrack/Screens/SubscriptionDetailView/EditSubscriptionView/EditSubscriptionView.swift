@@ -60,8 +60,8 @@ struct EditSubscriptionView: View {
     }
 }
 
-//struct EditSubscriptionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditSubscriptionView(viewModel: SubTrackViewModel(), subscription: MockData.service1)
-//    }
-//}
+struct EditSubscriptionView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditSubscriptionView(viewModel: SubTrackViewModel())
+    }
+}

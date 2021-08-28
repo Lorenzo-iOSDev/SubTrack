@@ -43,8 +43,8 @@ struct SubscriptionCard: View {
     }
 }
 
-//struct SubscriptionCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SubscriptionCard(subscription: MockData.service1)
-//    }
-//}
+struct SubscriptionCard_Previews: PreviewProvider {
+    static var previews: some View {
+        SubscriptionCard(subscription: MockData.service1)
+    }
+}

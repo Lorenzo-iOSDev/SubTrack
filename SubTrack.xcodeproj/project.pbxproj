@@ -35,6 +35,7 @@
 		9CA45FA2269402F3008344A4 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45FA1269402F3008344A4 /* Date+Ext.swift */; };
 		9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */; };
 		9CD1F02926D6433A00C0AE0E /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */; };
+		9CD6B8A426DA01DE00FAC934 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6B8A326DA01DE00FAC934 /* Icon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		9CA45FA1269402F3008344A4 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSubscriptionView.swift; sourceTree = "<group>"; };
 		9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		9CD6B8A326DA01DE00FAC934 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,14 @@
 			path = EditSubscriptionView;
 			sourceTree = "<group>";
 		};
+		9CD6B8A226DA019000FAC934 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				9CD6B8A326DA01DE00FAC934 /* Icon.swift */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
 		9CE8578326B696F0001D7A3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +201,7 @@
 		9CE8578526B6971D001D7A3E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9CD6B8A226DA019000FAC934 /* Icon */,
 				9CE8578F26B69E41001D7A3E /* Cards */,
 				9CE8578C26B69DB9001D7A3E /* EmptyStates */,
 				9CE8578B26B69C24001D7A3E /* Buttons */,
@@ -391,6 +402,7 @@
 				9C6B26B9268FDD2400E4D428 /* SubTrackApp.swift in Sources */,
 				9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */,
 				9C83DBB126CE87A5002A5F02 /* TotalCostDetailView.swift in Sources */,
+				9CD6B8A426DA01DE00FAC934 /* Icon.swift in Sources */,
 				9C5FC60126A6B7AA00C4673E /* Upcoming.swift in Sources */,
 				9C27CA6D26A114EF00FAFC64 /* TotalCard.swift in Sources */,
 				9C6B26CE26901F2E00E4D428 /* Subscription.swift in Sources */,

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddButton: View {
+    
     var body: some View {
         Image(systemName: "plus")
             .foregroundColor(.primary)
