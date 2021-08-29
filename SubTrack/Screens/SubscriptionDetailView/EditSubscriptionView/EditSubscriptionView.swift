@@ -18,7 +18,7 @@ struct EditSubscriptionView: View {
                     Section(header: Text("Subscription Details")) {
                         TextField("Name", text: $viewModel.newName)
                         TextField("Price", text: $viewModel.newPrice)
-                        DatePicker("Start Date", selection: $viewModel.newDate, in: Date().oneHundredYearsAgo...Date(), displayedComponents: .date)
+                        DatePicker("Start Date", selection: $viewModel.newDate, displayedComponents: .date)
                         Picker("Payment Frequency", selection: $viewModel.newPaymentFreq) {
                             ForEach(PaymentFrequency.allCases.indices) { index in
                                 Text(PaymentFrequency.allCases[index].rawValue)

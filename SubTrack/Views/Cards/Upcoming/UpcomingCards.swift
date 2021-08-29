@@ -77,6 +77,22 @@ struct UpcomingCards: View {
                     SubscriptionCard(subscription: subscription)
                 }
             }
+            
+            if (viewModel.nextMonthBeyond.count != 0) {
+                HStack {
+                    Text(Upcoming.SubsequentMonths.rawValue)
+                        .font(.title3)
+                        .fontWeight(.medium)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 10)
+                .padding(.top, 10)
+                
+                ForEach(viewModel.nextMonthBeyond) { subscription in
+                    SubscriptionCard(subscription: subscription)
+                }
+            }
         }
     }
 }

@@ -12,4 +12,5 @@ enum Upcoming: String {
     case Tomorrow = "Tomorrow"
     case ThisWeek = "This Week"
     case ThisMonth = "This Month"
+    case SubsequentMonths = "Subsequent Months"
 }

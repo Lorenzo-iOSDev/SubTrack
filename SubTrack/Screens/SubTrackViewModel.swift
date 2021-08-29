@@ -21,6 +21,7 @@ final class SubTrackViewModel: ObservableObject {
     @Published var tomorrow: [Subscription] = []
     @Published var thisWeek: [Subscription] = []
     @Published var thisMonth: [Subscription] = []
+    @Published var nextMonthBeyond: [Subscription] = []
     
     //View Dependent bools
     @Published var isShowingAddSubscription = false
@@ -164,6 +165,7 @@ final class SubTrackViewModel: ObservableObject {
         tomorrow = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.Tomorrow}
         thisWeek = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.ThisWeek}
         thisMonth = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.ThisMonth}
+        nextMonthBeyond = sortedSubscriptions.filter { $0.upcomingClassifier == Upcoming.SubsequentMonths}
     }
     
     //Function used in AddSubscriptionView modal

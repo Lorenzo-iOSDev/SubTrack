@@ -64,6 +64,8 @@ final class Subscription: Identifiable, Codable, Equatable{
             return Upcoming.ThisWeek
         } else if dateCompsWeekOfMonth != currentDateCompsWeekOfMonth && differenceInMonths == 0 {
             return Upcoming.ThisMonth
+        } else if differenceInMonths != 0 {
+            return Upcoming.SubsequentMonths
         }
         
         return nil
@@ -80,6 +82,8 @@ final class Subscription: Identifiable, Codable, Equatable{
             return 3
         case .ThisMonth:
             return 4
+        case .SubsequentMonths:
+            return 5
         case .none:
             return 5
         }
