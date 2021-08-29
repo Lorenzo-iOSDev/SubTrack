@@ -21,7 +21,9 @@ class LocalNotificationManager: ObservableObject {
     }
     
     //Function to add notification to UNNotificationCenter
-    func sendNotification(title: String, subtitle: String?, body: String, sendIn: Double) {
+    func sendNotification(id: String, title: String, subtitle: String?, body: String, sendIn: Double) {
+        print("new notification id is: \(id)")
+        
         let content = UNMutableNotificationContent()
         content.title = title
         
@@ -40,9 +42,24 @@ class LocalNotificationManager: ObservableObject {
             trigger = UNTimeIntervalNotificationTrigger(timeInterval: sendIn, repeats: false)
         }
         
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)
     }
     
+    func removeNotification(id: String) {
+        print("ID to remove is \(id)")
+        
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests { notificationRequests in
+            for notification in notificationRequests {
+                if notification.identifier == id {
+                    print("Did not remove notification")
+                } else {
+                    print("Removed notification")
+                }
+            }
+        }
+    }
 }

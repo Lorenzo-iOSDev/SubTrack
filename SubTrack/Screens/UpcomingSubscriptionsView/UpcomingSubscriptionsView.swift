@@ -59,5 +59,9 @@ struct UpcomingSubscriptionsView: View {
 struct UpcomingSubscriptionsView_Previews: PreviewProvider {
     static var previews: some View {
         UpcomingSubscriptionsView(viewModel: SubTrackViewModel())
+            .preferredColorScheme(.light)
+        
+        UpcomingSubscriptionsView(viewModel: SubTrackViewModel())
+            .preferredColorScheme(.dark)
     }
 }

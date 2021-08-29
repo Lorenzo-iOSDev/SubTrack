@@ -214,7 +214,9 @@ final class SubTrackViewModel: ObservableObject {
         
         let date = Date()
         print("\n\n \(newSub.paymentDate)")
-        notificationManager.sendNotification(title: newSub.serviceName, subtitle: nil,
+        notificationManager.sendNotification(id: newSub.id.uuidString,
+                                             title: newSub.serviceName,
+                                             subtitle: nil,
                                              body: "Payment for \(newSub.serviceName) is due",
                                              sendIn: newSub.paymentDate.timeIntervalSince(date))
         
@@ -241,6 +243,9 @@ final class SubTrackViewModel: ObservableObject {
     
     //Deletes subscription at a certain index, used for swipe to delete in AllSubscriptionsView
     func deleteSubscription(at offsets: IndexSet) {
+        
+        notificationManager.removeNotification(id: subscriptions[offsets.first!].id.uuidString)
+        
         subscriptions.remove(atOffsets: offsets)
         
         saveSubscriptions()
@@ -290,8 +295,11 @@ final class SubTrackViewModel: ObservableObject {
                 update.updatePayment()
                 saveSubscriptions()
                 
-                notificationManager.sendNotification(title: update.serviceName,
-                                                     subtitle: nil, body: "Payment for \(update.serviceName) is due today",
+                notificationManager.removeNotification(id: update.id.uuidString)
+                notificationManager.sendNotification(id: update.id.uuidString,
+                                                     title: update.serviceName,
+                                                     subtitle: nil,
+                                                     body: "Payment for \(update.serviceName) is due today",
                                                      sendIn: update.paymentDate.timeIntervalSince(date))
             }
         }
@@ -418,8 +426,11 @@ final class SubTrackViewModel: ObservableObject {
         replacementSub.updatePayment()
         
         let date = Date()
-        notificationManager.sendNotification(title: replacementSub.serviceName,
-                                             subtitle: nil, body: "Payment for \(replacementSub.serviceName) is due today",
+        notificationManager.removeNotification(id: selectedSubscription.id.uuidString)
+        notificationManager.sendNotification(id: replacementSub.id.uuidString,
+                                             title: replacementSub.serviceName,
+                                             subtitle: nil,
+                                             body: "Payment for \(replacementSub.serviceName) is due today",
                                              sendIn: replacementSub.paymentDate.timeIntervalSince(date))
         
         sortedSubscriptions = subscriptions.filter { $0.upcomingClassifier != nil }
@@ -436,6 +447,14 @@ final class SubTrackViewModel: ObservableObject {
     //Works by finding the index of the selected subscription and deleted that index
     //Then refreshing arrays by saving and retrieving
     func deleteButtonPressed() {
+        
+        guard let selectedSubscription = selectedSubscription else {
+            print("error unwrapping selected subscription in deleteButtonPressed()")
+            alertItem = AlertContext.unableToReadSelectedSub
+            return
+        }
+        
+        notificationManager.removeNotification(id: selectedSubscription.id.uuidString)
         
         guard let index = subscriptions.firstIndex(where: { $0 == selectedSubscription }) else {
             print("Could not find matching subscription")
