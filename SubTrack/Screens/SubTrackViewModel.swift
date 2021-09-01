@@ -173,6 +173,11 @@ final class SubTrackViewModel: ObservableObject {
     //Also re-does sortedSubscription array and filters subscriptions into classified arrays as well.
     //Also adds notification call
     func addSubscription() {
+        if subName.isEmptyIncWhiteSpace() {
+            alertItem = AlertContext.invalidForm
+            return
+        }
+        
         guard let priceDouble = Double(subPrice) else {
             alertItem = AlertContext.invalidDouble
             return
@@ -377,6 +382,11 @@ final class SubTrackViewModel: ObservableObject {
     //Also adds notification call
     func saveEdit() {
         
+        if newName.isEmptyIncWhiteSpace() {
+            alertItem = AlertContext.invalidForm
+            return
+        }
+        
         guard let selectedSubscription = selectedSubscription else {
             print("error unwrapping selected subscription in saveEdit()")
             alertItem = AlertContext.unableToReadSelectedSub
@@ -442,6 +452,7 @@ final class SubTrackViewModel: ObservableObject {
         saveSubscriptions()
         resetFormFields()
         
+        isShowingEditView = false
         isShowingDetailView = false
     }
     

@@ -33,7 +33,6 @@ struct EditSubscriptionView: View {
                     Section {
                         Button {
                             viewModel.saveEdit()
-                            viewModel.isShowingEditView = false
                         } label: {
                             Text("Save Subscription")
                         }
@@ -57,6 +56,11 @@ struct EditSubscriptionView: View {
             } label: {
             XDismissButton()
             }.padding(), alignment: .topTrailing)
+        .alert(item: $viewModel.alertItem) { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
+        }
     }
 }
 

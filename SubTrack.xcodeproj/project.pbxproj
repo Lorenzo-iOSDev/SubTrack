@@ -13,6 +13,7 @@
 		9C27CA6F26A1158500FAFC64 /* SubscriptionListCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27CA6E26A1158500FAFC64 /* SubscriptionListCard.swift */; };
 		9C27CA7126A1182A00FAFC64 /* SubscriptionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27CA7026A1182A00FAFC64 /* SubscriptionCard.swift */; };
 		9C27CA7326A1186E00FAFC64 /* UpcomingCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27CA7226A1186E00FAFC64 /* UpcomingCards.swift */; };
+		9C3F203E26DF733100A1DD6F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3F203D26DF733000A1DD6F /* String+Ext.swift */; };
 		9C46FC6226B8E7110085961E /* STError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C46FC6126B8E7110085961E /* STError.swift */; };
 		9C46FC6426B8E7910085961E /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C46FC6326B8E7910085961E /* AlertItem.swift */; };
 		9C5FC60126A6B7AA00C4673E /* Upcoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FC60026A6B7AA00C4673E /* Upcoming.swift */; };
@@ -45,6 +46,7 @@
 		9C27CA6E26A1158500FAFC64 /* SubscriptionListCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListCard.swift; sourceTree = "<group>"; };
 		9C27CA7026A1182A00FAFC64 /* SubscriptionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCard.swift; sourceTree = "<group>"; };
 		9C27CA7226A1186E00FAFC64 /* UpcomingCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingCards.swift; sourceTree = "<group>"; };
+		9C3F203D26DF733000A1DD6F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		9C46FC6126B8E7110085961E /* STError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STError.swift; sourceTree = "<group>"; };
 		9C46FC6326B8E7910085961E /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		9C5FC60026A6B7AA00C4673E /* Upcoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				9CA45FA1269402F3008344A4 /* Date+Ext.swift */,
+				9C3F203D26DF733000A1DD6F /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */,
 				9C83DBB126CE87A5002A5F02 /* TotalCostDetailView.swift in Sources */,
 				9CD6B8A426DA01DE00FAC934 /* Icon.swift in Sources */,
+				9C3F203E26DF733100A1DD6F /* String+Ext.swift in Sources */,
 				9C5FC60126A6B7AA00C4673E /* Upcoming.swift in Sources */,
 				9C27CA6D26A114EF00FAFC64 /* TotalCard.swift in Sources */,
 				9C6B26CE26901F2E00E4D428 /* Subscription.swift in Sources */,
@@ -536,7 +540,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SubTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = CQBWLP3366;
 				ENABLE_PREVIEWS = YES;
@@ -546,7 +550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lorenzozemp.SubTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -560,7 +564,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SubTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = CQBWLP3366;
 				ENABLE_PREVIEWS = YES;
@@ -570,7 +574,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lorenzozemp.SubTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
