@@ -22,6 +22,8 @@ struct UpcomingSubscriptionsView: View {
                     Text("Upcoming Payments")
                         .font(.largeTitle)
                         .fontWeight(.medium)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                     
                     Spacer()
                     

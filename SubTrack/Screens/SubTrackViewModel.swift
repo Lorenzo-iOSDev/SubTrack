@@ -178,6 +178,11 @@ final class SubTrackViewModel: ObservableObject {
             return
         }
         
+        if subName.count > 42 {
+            alertItem = AlertContext.invalidCharacterCount
+            return
+        }
+        
         guard let priceDouble = Double(subPrice) else {
             alertItem = AlertContext.invalidDouble
             return
@@ -384,6 +389,11 @@ final class SubTrackViewModel: ObservableObject {
         
         if newName.isEmptyIncWhiteSpace() {
             alertItem = AlertContext.invalidForm
+            return
+        }
+        
+        if newName.count > 42 {
+            alertItem = AlertContext.invalidCharacterCount
             return
         }
         

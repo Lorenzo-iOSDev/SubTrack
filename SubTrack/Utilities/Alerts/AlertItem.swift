@@ -36,6 +36,10 @@ struct AlertContext {
                                             message: Text("Saved data is invalid. Please contact developer."),
                                             dismissButton: .default(Text("OK")))
     
+    static let invalidCharacterCount = AlertItem(title: Text("Reached Character Limit"),
+                                               message: Text("The character limit for subscription name is 42 characters"),
+                                               dismissButton: .default(Text("OK")))
+    
     static let unableToSave = AlertItem(title: Text("Could not save data"),
                                         message: Text("Unable to save data. Please contact developer."),
                                         dismissButton: .default(Text("OK")))

@@ -22,6 +22,8 @@ struct AllSubscriptionsView: View {
                     Text("All Subscriptions")
                         .font(.largeTitle)
                         .fontWeight(.medium)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                     
                     Spacer()
                     
