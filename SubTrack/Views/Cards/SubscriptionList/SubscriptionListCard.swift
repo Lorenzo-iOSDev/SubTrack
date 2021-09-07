@@ -15,7 +15,7 @@ struct SubscriptionListCard: View {
     var body: some View {
         List{
             ForEach(viewModel.subscriptions) { service in
-                SubscriptionListCardCell(subscription: service)
+                SubscriptionListCardCell(viewModel: viewModel, subscription: service)
                     .contentShape(Rectangle()) // fixes onTapGesture not working with empty spaces.
                     .onTapGesture {
                         print("payment start date for \(service.serviceName) is \(service.subStartDate)")
@@ -52,6 +52,7 @@ struct SubscriptionListCard_Previews: PreviewProvider {
 
 struct SubscriptionListCardCell: View {
     
+    @ObservedObject var viewModel: SubTrackViewModel
     var subscription: Subscription
     
     var body: some View {
@@ -73,7 +74,7 @@ struct SubscriptionListCardCell: View {
             
             Spacer()
             
-            Text("$\(subscription.price, specifier: "%.2f")")
+            Text("\(Currency.allCases[viewModel.currency].rawValue)\(subscription.price, specifier: "%.\(viewModel.decimalAmount)f")")
                 .font(.title3)
         }
     }

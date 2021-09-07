@@ -23,7 +23,7 @@ struct TotalCostDetailView: View {
                     Text("Cost per Day")
                         .bold()
                         .multilineTextAlignment(.center)
-                    Text("$\(viewModel.costPerDay, specifier: "%.2f")")
+                    Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costPerDay, specifier: "%.\(viewModel.decimalAmount)f")")
                         .padding(5)
                 }.padding()
                 
@@ -31,7 +31,7 @@ struct TotalCostDetailView: View {
                     Text("Cost per Half Year")
                         .bold()
                         .multilineTextAlignment(.center)
-                    Text("$\(viewModel.costPerHalfYear, specifier: "%.2f")")
+                    Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costPerHalfYear, specifier: "%.\(viewModel.decimalAmount)f")")
                         .padding(5)
                 }.padding()
                 
@@ -39,7 +39,7 @@ struct TotalCostDetailView: View {
                     Text("Cost per Year")
                         .bold()
                         .multilineTextAlignment(.center)
-                    Text("$\(viewModel.costPerYear, specifier: "%.2f")")
+                    Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costPerYear, specifier: "%.\(viewModel.decimalAmount)f")")
                         .padding(5)
                 }.padding()
             }

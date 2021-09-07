@@ -28,6 +28,10 @@ struct AlertContext {
                                          message: Text("Invalid data inputted for price, please make sure price only contains\n the numbers 0-9 and '.'"),
                                          dismissButton: .default(Text("OK")))
     
+    static let invalidPrice = AlertItem(title: Text("Invalid Price"),
+                                         message: Text("Invalid price inputted, price cannot be more than 99,999"),
+                                         dismissButton: .default(Text("OK")))
+    
     static let invalidRetrieval = AlertItem(title: Text("Unable to retrieve data"),
                                             message: Text("Unable to retrieve saved data. Please contact developer."),
                                             dismissButton: .default(Text("OK")))

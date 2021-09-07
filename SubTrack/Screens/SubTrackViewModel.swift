@@ -43,6 +43,10 @@ final class SubTrackViewModel: ObservableObject {
     @Published var newPaymentFreq = 1
     @Published var newSymbol = 0
     
+    //SettingsView
+    @AppStorage("currency") var currency = 0
+    @AppStorage("decimalAmount") var decimalAmount = 2
+    
     //IconPickerView
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
@@ -188,26 +192,36 @@ final class SubTrackViewModel: ObservableObject {
             return
         }
         
+        if priceDouble > 9999 {
+            alertItem = AlertContext.invalidPrice
+            return
+        }
+        
         var paymentDate = Date()
         
-        switch paymentFreqPicked {
-        case 0:
-            paymentDate = subDate.nextWeek()
+        if Date() < subDate {
+            print("Subscription Start date is in Future")
+            paymentDate = subDate
+        } else {
+            switch paymentFreqPicked {
+            case 0:
+                paymentDate = subDate.nextWeek()
 
-        case 1:
-            paymentDate = subDate.nextMonth()
+            case 1:
+                paymentDate = subDate.nextMonth()
 
-        case 2:
-            paymentDate = subDate.nextQuarter()
+            case 2:
+                paymentDate = subDate.nextQuarter()
 
-        case 3:
-            paymentDate = subDate.nextHalfYear()
+            case 3:
+                paymentDate = subDate.nextHalfYear()
 
-        case 4 :
-            paymentDate = subDate.nextYear()
+            case 4 :
+                paymentDate = subDate.nextYear()
 
-        default:
-            paymentDate = subDate.nextMonth()
+            default:
+                paymentDate = subDate.nextMonth()
+            }
         }
         
         let newSub = Subscription(serviceName: subName,
@@ -321,46 +335,49 @@ final class SubTrackViewModel: ObservableObject {
     //Does this by switching based on Payment Frequency of subscription and comparing the subscriptions start date to the next payment date
     func costSoFar(of subscription: Subscription) -> Double {
         
-        switch subscription.paymentFrequency {
-        
-        case .Weekly:
-            var diffInWeeks = Calendar.current.dateComponents([.weekOfYear], from: subscription.subStartDate, to: subscription.paymentDate)
-            if diffInWeeks.weekOfYear == 0 { diffInWeeks.weekOfYear = 1 }
-            return subscription.price * Double(diffInWeeks.weekOfYear!)
-            
-        case .Monthly:
-            var diffInMonths = Calendar.current.dateComponents([.month], from: subscription.subStartDate, to: subscription.paymentDate)
-            if diffInMonths.month == 0 { diffInMonths.month = 1 }
-            return subscription.price * Double(diffInMonths.month!)
-            
-        case .Quarterly:
-            let diffInQuarter = Calendar.current.dateComponents([.month], from: subscription.subStartDate, to: subscription.paymentDate)
-            
-            var amountOfQuarters: Double
-            
-            if diffInQuarter.month!.isMultiple(of: 4) {
-                amountOfQuarters = Double(diffInQuarter.month!) / 4.0
-                return subscription.price * amountOfQuarters
-            } else {
-                return subscription.price
+        if Date() < subscription.subStartDate {
+            return 0
+        } else {
+            switch subscription.paymentFrequency {
+            case .Weekly:
+                var diffInWeeks = Calendar.current.dateComponents([.weekOfYear], from: subscription.subStartDate, to: subscription.paymentDate)
+                if diffInWeeks.weekOfYear == 0 { diffInWeeks.weekOfYear = 1 }
+                return subscription.price * Double(diffInWeeks.weekOfYear!)
+                
+            case .Monthly:
+                var diffInMonths = Calendar.current.dateComponents([.month], from: subscription.subStartDate, to: subscription.paymentDate)
+                if diffInMonths.month == 0 { diffInMonths.month = 1 }
+                return subscription.price * Double(diffInMonths.month!)
+                
+            case .Quarterly:
+                let diffInQuarter = Calendar.current.dateComponents([.month], from: subscription.subStartDate, to: subscription.paymentDate)
+                
+                var amountOfQuarters: Double
+                
+                if diffInQuarter.month!.isMultiple(of: 4) {
+                    amountOfQuarters = Double(diffInQuarter.month!) / 4.0
+                    return subscription.price * amountOfQuarters
+                } else {
+                    return subscription.price
+                }
+                
+            case .BiAnnually:
+                let diffInBiAnnualInMonths = Calendar.current.dateComponents([.month], from: subscription.subStartDate, to: subscription.paymentDate)
+                
+                var amountOfHalfYears: Double
+                
+                if diffInBiAnnualInMonths.month!.isMultiple(of: 6) {
+                    amountOfHalfYears = Double(diffInBiAnnualInMonths.month!) / 6.0
+                    return subscription.price * amountOfHalfYears
+                } else {
+                    return subscription.price
+                }
+                
+            case .Annually:
+                var diffInYears = Calendar.current.dateComponents([.year], from: subscription.subStartDate, to: subscription.paymentDate)
+                if diffInYears.year == 0 { diffInYears.weekOfYear = 1}
+                return subscription.price * Double(diffInYears.year!)
             }
-            
-        case .BiAnnually:
-            let diffInBiAnnualInMonths = Calendar.current.dateComponents([.month], from: subscription.subStartDate, to: subscription.paymentDate)
-            
-            var amountOfHalfYears: Double
-            
-            if diffInBiAnnualInMonths.month!.isMultiple(of: 6) {
-                amountOfHalfYears = Double(diffInBiAnnualInMonths.month!) / 6.0
-                return subscription.price * amountOfHalfYears
-            } else {
-                return subscription.price
-            }
-            
-        case .Annually:
-            var diffInYears = Calendar.current.dateComponents([.year], from: subscription.subStartDate, to: subscription.paymentDate)
-            if diffInYears.year == 0 { diffInYears.weekOfYear = 1}
-            return subscription.price * Double(diffInYears.year!)
         }
     }
     
@@ -409,30 +426,40 @@ final class SubTrackViewModel: ObservableObject {
             return
         }
         
-        var newPaymentDate = Date()
-        
-        switch newPaymentFreq {
-        case 0:
-            newPaymentDate = newDate.nextWeek()
-            
-        case 1:
-            newPaymentDate = newDate.nextMonth()
-        
-        case 2:
-            newPaymentDate = newDate.nextQuarter()
-        case 3:
-            newPaymentDate = newDate.nextHalfYear()
-            
-        case 4 :
-            newPaymentDate = newDate.nextYear()
-            
-        default:
-            newPaymentDate = subDate.nextMonth()
-        }
-        
         guard let priceDouble = Double(newPrice) else {
             alertItem = AlertContext.invalidDouble
             return
+        }
+        
+        if priceDouble > 9999 {
+            alertItem = AlertContext.invalidPrice
+            return
+        }
+        
+        var newPaymentDate = Date()
+        
+        if Date() < newDate {
+            print("New sub start date is in future")
+            newPaymentDate = newDate
+        } else {
+            switch newPaymentFreq {
+            case 0:
+                newPaymentDate = newDate.nextWeek()
+                
+            case 1:
+                newPaymentDate = newDate.nextMonth()
+            
+            case 2:
+                newPaymentDate = newDate.nextQuarter()
+            case 3:
+                newPaymentDate = newDate.nextHalfYear()
+                
+            case 4 :
+                newPaymentDate = newDate.nextYear()
+                
+            default:
+                newPaymentDate = subDate.nextMonth()
+            }
         }
         
         let replacementSub = Subscription(serviceName: newName,

@@ -21,7 +21,7 @@ struct UpcomingSubscriptionsView: View {
                 HStack{
                     Text("Upcoming Payments")
                         .font(.largeTitle)
-                        .fontWeight(.medium)
+                        .fontWeight(.bold)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                     

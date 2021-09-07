@@ -34,6 +34,8 @@
 		9CA45F9E2693A69E008344A4 /* AddSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */; };
 		9CA45FA02693AF22008344A4 /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45F9F2693AF22008344A4 /* XDismissButton.swift */; };
 		9CA45FA2269402F3008344A4 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA45FA1269402F3008344A4 /* Date+Ext.swift */; };
+		9CB53F5326E197BB00476E79 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB53F5226E197BB00476E79 /* SettingsView.swift */; };
+		9CB53F5526E19A7600476E79 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB53F5426E19A7600476E79 /* Currency.swift */; };
 		9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */; };
 		9CD1F02926D6433A00C0AE0E /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */; };
 		9CD6B8A426DA01DE00FAC934 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6B8A326DA01DE00FAC934 /* Icon.swift */; };
@@ -69,6 +71,8 @@
 		9CA45F9D2693A69E008344A4 /* AddSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionView.swift; sourceTree = "<group>"; };
 		9CA45F9F2693AF22008344A4 /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
 		9CA45FA1269402F3008344A4 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		9CB53F5226E197BB00476E79 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9CB53F5426E19A7600476E79 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		9CC9C7C326C1236D0058D5F8 /* EditSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSubscriptionView.swift; sourceTree = "<group>"; };
 		9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		9CD6B8A326DA01DE00FAC934 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
@@ -158,6 +162,14 @@
 			path = SubscriptionDetailView;
 			sourceTree = "<group>";
 		};
+		9CB53F5126E197A400476E79 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				9CB53F5226E197BB00476E79 /* SettingsView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 		9CC9C7C226C123250058D5F8 /* EditSubscriptionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +193,7 @@
 				9C9E0EDD269198EE006445CF /* SubTrackViewModel.swift */,
 				9CE8578626B69ADA001D7A3E /* AllSubscriptionsView */,
 				9CE8578726B69AE7001D7A3E /* UpcomingSubscriptionsView */,
+				9CB53F5126E197A400476E79 /* SettingsView */,
 				9CE8578826B69AF4001D7A3E /* AddSubscriptionsView */,
 				9C203E8B26BA7EAC00BB0731 /* IconPickerView */,
 				9C84ED2626BCB64400B5F2B5 /* SubscriptionDetailView */,
@@ -194,6 +207,7 @@
 				9C6B26CD26901F2E00E4D428 /* Subscription.swift */,
 				9C5FC60026A6B7AA00C4673E /* Upcoming.swift */,
 				9C5FC60226A6B7C400C4673E /* Symbols.swift */,
+				9CB53F5426E19A7600476E79 /* Currency.swift */,
 				9C5FC60426A6B7D700C4673E /* PaymentFrequency.swift */,
 				9CD1F02826D6433A00C0AE0E /* LocalNotificationManager.swift */,
 			);
@@ -390,6 +404,7 @@
 				9C46FC6226B8E7110085961E /* STError.swift in Sources */,
 				9C9E0EDE269198EE006445CF /* SubTrackViewModel.swift in Sources */,
 				9C203E8A26BA7C7400BB0731 /* IconPickerView.swift in Sources */,
+				9CB53F5526E19A7600476E79 /* Currency.swift in Sources */,
 				9C27CA7326A1186E00FAFC64 /* UpcomingCards.swift in Sources */,
 				9C27CA7126A1182A00FAFC64 /* SubscriptionCard.swift in Sources */,
 				9C27CA6B26A1138E00FAFC64 /* AddButton.swift in Sources */,
@@ -402,6 +417,7 @@
 				9C6B26CA268FF74000E4D428 /* UpcomingSubscriptionsView.swift in Sources */,
 				9CD1F02926D6433A00C0AE0E /* LocalNotificationManager.swift in Sources */,
 				9C70027E26D51A5A00515425 /* AllSubsEmptyState.swift in Sources */,
+				9CB53F5326E197BB00476E79 /* SettingsView.swift in Sources */,
 				9C6B26B9268FDD2400E4D428 /* SubTrackApp.swift in Sources */,
 				9CC9C7C426C1236D0058D5F8 /* EditSubscriptionView.swift in Sources */,
 				9C83DBB126CE87A5002A5F02 /* TotalCostDetailView.swift in Sources */,
@@ -540,7 +556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SubTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = CQBWLP3366;
 				ENABLE_PREVIEWS = YES;
@@ -550,7 +566,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lorenzozemp.SubTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -564,7 +580,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SubTrack/Preview Content\"";
 				DEVELOPMENT_TEAM = CQBWLP3366;
 				ENABLE_PREVIEWS = YES;
@@ -574,7 +590,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lorenzozemp.SubTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

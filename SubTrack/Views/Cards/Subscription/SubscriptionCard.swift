@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SubscriptionCard: View {
     
+    @ObservedObject var viewModel: SubTrackViewModel
     @Environment(\.colorScheme) var colorScheme
     
     var subscription: Subscription
@@ -32,7 +33,7 @@ struct SubscriptionCard: View {
             Spacer()
             
             
-            Text("$\(subscription.price, specifier: "%.2f")")
+            Text("\(Currency.allCases[viewModel.currency].rawValue)\(subscription.price, specifier: "%.\(viewModel.decimalAmount)f")")
                 .font(.title3)
         }
         .padding()
@@ -45,6 +46,6 @@ struct SubscriptionCard: View {
 
 struct SubscriptionCard_Previews: PreviewProvider {
     static var previews: some View {
-        SubscriptionCard(subscription: MockData.service1)
+        SubscriptionCard(viewModel: SubTrackViewModel(), subscription: MockData.service1)
     }
 }

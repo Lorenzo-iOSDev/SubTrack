@@ -47,9 +47,11 @@ struct SubscriptionDetailView: View {
                             .padding(.vertical, 3)
                         Text("\(viewModel.selectedSubscription!.paymentDate.toString())")
                             .padding(.vertical,3)
-                        Text("$\(viewModel.selectedSubscription!.price, specifier: "%.2f")")
+                        Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.selectedSubscription!.price, specifier: "%.\(viewModel.decimalAmount)f")")
                             .padding(.vertical, 3)
-                        Text("$\(viewModel.costSoFar(of: viewModel.selectedSubscription!), specifier: "%.2f")")
+                        Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costSoFar(of: viewModel.selectedSubscription!), specifier: "%.\(viewModel.decimalAmount)f")")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
                             .padding(.vertical, 3)
                     }
                     .padding()

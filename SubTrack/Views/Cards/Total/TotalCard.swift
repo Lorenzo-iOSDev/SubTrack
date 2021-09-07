@@ -25,7 +25,7 @@ struct TotalCard: View {
                 
                 Spacer()
                 
-                Text("$\(viewModel.costThisMonth, specifier: "%.2f")")
+                Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costThisMonth, specifier: "%.\(viewModel.decimalAmount)f")")
                     .font(.title3)
             }
             .padding()

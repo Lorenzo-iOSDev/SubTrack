@@ -26,7 +26,7 @@ struct UpcomingCards: View {
                 .padding(.top, 10)
                 
                 ForEach(viewModel.today) { subscription in
-                    SubscriptionCard(subscription: subscription)
+                    SubscriptionCard(viewModel: viewModel, subscription: subscription)
                 }
             }
             
@@ -42,7 +42,7 @@ struct UpcomingCards: View {
                 .padding(.top, 10)
                 
                 ForEach(viewModel.tomorrow) { subscription in
-                    SubscriptionCard(subscription: subscription)
+                    SubscriptionCard(viewModel: viewModel, subscription: subscription)
                 }
             }
             
@@ -58,7 +58,7 @@ struct UpcomingCards: View {
                 .padding(.top, 10)
                 
                 ForEach(viewModel.thisWeek) { subscription in
-                    SubscriptionCard(subscription: subscription)
+                    SubscriptionCard(viewModel: viewModel, subscription: subscription)
                 }
             }
             
@@ -74,7 +74,7 @@ struct UpcomingCards: View {
                 .padding(.top, 10)
                 
                 ForEach(viewModel.thisMonth) { subscription in
-                    SubscriptionCard(subscription: subscription)
+                    SubscriptionCard(viewModel: viewModel, subscription: subscription)
                 }
             }
             
@@ -90,7 +90,7 @@ struct UpcomingCards: View {
                 .padding(.top, 10)
                 
                 ForEach(viewModel.nextMonthBeyond) { subscription in
-                    SubscriptionCard(subscription: subscription)
+                    SubscriptionCard(viewModel: viewModel, subscription: subscription)
                 }
             }
         }

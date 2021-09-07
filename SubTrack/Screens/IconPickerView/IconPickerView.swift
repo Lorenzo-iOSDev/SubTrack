@@ -21,20 +21,18 @@ struct IconPickerView: View {
                 Spacer()
                 
                 if (viewModel.isShowingEditView == false) {
-                    SubscriptionCard(subscription: Subscription(serviceName: viewModel.subName,
+                    SubscriptionCard(viewModel: viewModel, subscription: Subscription(serviceName: viewModel.subName,
                                                                 paymentFrequency: PaymentFrequency.allCases[viewModel.paymentFreqPicked],
                                                                 serviceSymbol: Symbols.allCases[viewModel.symbolPicked],
                                                                 price: Double(viewModel.subPrice) ?? 0.00,
                                                                 subStartDate: Date(), paymentDate: Date()))
                 } else {
-                    SubscriptionCard(subscription: Subscription(serviceName: viewModel.newName,
+                    SubscriptionCard(viewModel: viewModel, subscription: Subscription(serviceName: viewModel.newName,
                                                                 paymentFrequency: PaymentFrequency.allCases[viewModel.newPaymentFreq],
                                                                 serviceSymbol: Symbols.allCases[viewModel.newSymbol],
                                                                 price: Double(viewModel.newPrice) ?? 0.00,
                                                                 subStartDate: Date(), paymentDate: Date()))
                 }
-                
-                
                 
                 Spacer()
                     .frame(height: 100)

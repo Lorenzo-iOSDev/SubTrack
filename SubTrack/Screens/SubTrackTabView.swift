@@ -24,6 +24,12 @@ struct SubTrackTabView: View {
                     Image(systemName: "calendar")
                     Text("Upcoming")
                 }
+            
+            SettingsView(viewModel: viewModel)
+                .tabItem {
+                    Image(systemName: "gearshape")
+                    Text("Settings")
+                }
         }
         .accentColor(.primary)
     }

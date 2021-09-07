@@ -21,7 +21,7 @@ struct AllSubscriptionsView: View {
                 HStack{
                     Text("All Subscriptions")
                         .font(.largeTitle)
-                        .fontWeight(.medium)
+                        .fontWeight(.bold)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                     
