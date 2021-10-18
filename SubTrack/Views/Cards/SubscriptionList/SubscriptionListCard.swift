@@ -36,7 +36,7 @@ struct SubscriptionListCard: View {
         .onAppear {
             UITableView.appearance().backgroundColor = .clear
         }
-        .padding()
+        //.padding()
         .background(
             RoundedRectangle(cornerRadius: 10.0)
                 .foregroundColor(Color(colorScheme == .dark ? .secondarySystemBackground : .systemBackground)))

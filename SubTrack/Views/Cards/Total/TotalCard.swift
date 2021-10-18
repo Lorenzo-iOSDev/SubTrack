@@ -27,6 +27,8 @@ struct TotalCard: View {
                 
                 Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costThisMonth, specifier: "%.\(viewModel.decimalAmount)f")")
                     .font(.title3)
+                
+                Image(systemName: "chevron.right")
             }
             .padding()
             .background(
@@ -42,5 +44,9 @@ struct TotalCard: View {
 struct TotalCard_Previews: PreviewProvider {
     static var previews: some View {
         TotalCard(viewModel: SubTrackViewModel())
+            .preferredColorScheme(.light)
+        
+        TotalCard(viewModel: SubTrackViewModel())
+            .preferredColorScheme(.dark)
     }
 }

@@ -48,7 +48,7 @@ struct SettingsView: View {
                         Stepper("Decimal Amount: \(viewModel.decimalAmount)", value: $viewModel.decimalAmount, in: 0...2)
                     }
                     
-                    Section(header: Text("About the App")) {
+                    Section() {
                         VStack() {
                             Icon(systemName: "heart.circle.fill", sizeMultiplier: 3.0)
                                 .padding()
@@ -60,7 +60,7 @@ struct SettingsView: View {
                         HStack {
                             Text("Version")
                             Spacer()
-                            Text("0.8.0")
+                            Text("0.9.0")
                         }
                         
                         HStack {

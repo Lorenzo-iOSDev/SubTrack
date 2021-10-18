@@ -24,6 +24,8 @@ struct TotalCostDetailView: View {
                         .bold()
                         .multilineTextAlignment(.center)
                     Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costPerDay, specifier: "%.\(viewModel.decimalAmount)f")")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                         .padding(5)
                 }.padding()
                 
@@ -32,6 +34,8 @@ struct TotalCostDetailView: View {
                         .bold()
                         .multilineTextAlignment(.center)
                     Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costPerHalfYear, specifier: "%.\(viewModel.decimalAmount)f")")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                         .padding(5)
                 }.padding()
                 
@@ -40,6 +44,8 @@ struct TotalCostDetailView: View {
                         .bold()
                         .multilineTextAlignment(.center)
                     Text("\(Currency.allCases[viewModel.currency].rawValue)\(viewModel.costPerYear, specifier: "%.\(viewModel.decimalAmount)f")")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                         .padding(5)
                 }.padding()
             }
